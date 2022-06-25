@@ -2,6 +2,9 @@
   "name": "testhook",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "6.15.1"
+  },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
