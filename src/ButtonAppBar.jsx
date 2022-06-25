@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useRef, useContext} from 'react';
 import {MenuItem, AppBar, Menu, TextField, Toolbar, Typography, IconButton, Input} from '@mui/material';
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,6 +25,7 @@ export default function ButtonAppBar(props) {
   const [title, setTitle] = useState('')
   
 
+  const refNewSub = useRef()
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,8 +33,8 @@ export default function ButtonAppBar(props) {
   };
 
   useEffect(() => {
-
-  },[])
+    props.onChange(newsub)    
+  },[newsub])
 
 
 
@@ -62,8 +63,9 @@ export default function ButtonAppBar(props) {
   
 
   const handleMenuClick = (e) => {
-    setNewsub('')
+  //  setNewsub('')
     setAnchorEl(e.currentTarget)
+    
   };
 
 
@@ -72,13 +74,14 @@ export default function ButtonAppBar(props) {
   const handleMenuClose = (e) => {
     stopImmediatePropagation(e)
     setAnchorEl(null)
+    setNewsub(e.currentTarget.innerText)
     // const value = useContext(Context)
     // console.log('y los datos son... ',value)
 
     
-    if (subnames.includes(e.currentTarget.innerText)) {     
-      props.onChange(e.currentTarget.innerText)
-    }
+   //if (subnames.includes(e.currentTarget.innerText)) {     
+    //  props.onChange(e.currentTarget.innerText)
+   // }
     
   };
 
@@ -87,8 +90,7 @@ const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
     setAnchorEl(null)
-    const  tempnewsub = document.getElementById('textinput').value
-    setNewsub(tempnewsub)
+    setNewsub(refNewSub.current.value)
   }
 }
 
@@ -122,49 +124,16 @@ const handleKeyPress = (event) => {
           </MenuItem>
         ))
         : null        
-        }    
-      </Menu>
+        }
 
-      {/* <Context.Consumer>
-        {value => <h1>{value}</h1> }
-      </Context.Consumer> */}
-
-
-
-
-      {/* <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-
-        {(subnames.length > 0)
-        ? subnames.map((sub, index) => (
-          <MenuItem sx={{color: '#888'}} key={index} onClick={(e) => handleMenuClose(e)}>
-           <Typography variant='div'> {sub}</Typography>
-          </MenuItem>
-        ))
-        : null        
-        }          
-        
-        <br/>
         <MenuItem onClickCapture={stopImmediatePropagation}
           onKeyDown={e => e.stopPropagation()}>
-            <form onSubmit={onSubmit}>
-            Add sub: <input id='textinput' type="text" name="fname" 
+           
+            Add sub: <input ref={refNewSub} id='textinput' type="text" name="fname" 
              onKeyUp={handleKeyPress}/>           
-             <input type="text" onclick="myFunction()" value="Submit"/>
-            </form>
-            </MenuItem>
-            
-      </Menu> */}
-
-      {/* <MyFormHelperText onSubmit={(e) => enviar(e)} /> */}
-      
-
-
-      <Typography id='titulo' variant='h4' > {props.value} </Typography>
+             {/* <input type="text" onclick="myFunction()" value="Submit"/> */}           
+        </MenuItem>
+      </Menu>
 
     </Toolbar>
   </AppBar>

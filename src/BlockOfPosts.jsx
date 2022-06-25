@@ -12,7 +12,7 @@ import { Context } from './App'
 
 
 
-export default function BlockOfPosts() {
+export default function BlockOfPosts(props) {
 
    const [childData, setChildData] = useState(false)
 
@@ -53,7 +53,7 @@ export default function BlockOfPosts() {
    
 
 
-    const value = useContext(Context)
+    const value = useContext(Context) // trae los datos del Context creado en App
    // console.log('y los datos son... ',value)
 
 
@@ -64,9 +64,9 @@ export default function BlockOfPosts() {
              <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>
             
            {
-            (value && value !== undefined && value.data.children.length > 0)  //? posts.map(post =>          
+            (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
               ?  value.data.children.map(item =>
-                <Grid item key={item.data.created}  xs={4} sm={4} md={2}>
+                <Box key={item.data.created}  xs={4} sm={4} md={2}>
                     
                         <Datos 
                             key= {item.data.created}
@@ -80,7 +80,7 @@ export default function BlockOfPosts() {
                             topic={item.data.link_flair_text}
                         />
                     
-                </Grid> 
+                </Box> 
             
                 )
                  : <div>No existe ese subreddit</div>
