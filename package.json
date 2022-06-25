@@ -7,7 +7,7 @@
     "npm": "8.5.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node main.jsx",
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview"
