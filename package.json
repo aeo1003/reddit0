@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "engines": {
-    "node": "16.x",
+    "node": "16.15.1",
     "npm": "8.5.5"
   },
   "scripts": {
@@ -19,6 +19,7 @@
     "@mui/material": "^5.8.5",
     "@mui/styles": "^5.8.0",
     "axios": "^0.27.2",
+    "create-react-app": "^5.0.1",
     "react": ">=16.8.0",
     "react-dom": "^18.2.0"
   },
