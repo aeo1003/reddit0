@@ -67,7 +67,7 @@ export default function BlockOfPosts(props) {
     console.log('error----> : ',er)
     console.log('loading----> : ',lo)
 
-    if(lo && !da){ return <div><h1>loading...</h1></div> } 
+    if(lo){ return <div><h1>loading...</h1></div> } 
     
     if(!lo && er){ return <div><h1>No lo encuentro.</h1></div> }
     
