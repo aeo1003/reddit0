@@ -5,65 +5,58 @@ import useFetch from './useFetch'
 import ButtonAppBar from './ButtonAppBar'
 import Datos from './Datos'
 import BlockOfPosts from './BlockOfPosts'
-import { SettingsSystemDaydreamTwoTone } from '@mui/icons-material'
+// import { SettingsSystemDaydreamTwoTone } from '@mui/iconsmaterial'
 import { myFetch } from './myFetch'
+import axios from "axios"
+
 
 
 export const Context = createContext('default value')
 
-
-
 function App() {
 
-   const [title, setTitle] = useState('technology')
-   const [datos, setDatos] = useState([])
-   const [errors, setErrors] = useState([])
-
-   //const url = 'https://www.reddit.com/r/'+title+'.json'
+   const [title, setTitle] = useState('Technology')
+   
+   const url = 'https://www.reddit.com/r/'+title+'.json'
   
    // const refBar = useRef()
-   const {data,error,loading} = useFetch('https://www.reddit.com/r/'+title+'.json')
-  
+   const {data,error,loading} = useFetch(url)
+   console.log('Loading ahora mismo....',loading)
    
-
-   // console.log('data1 : ',data)
-   // console.log('error1 : ',error)
-   // console.log('loading1 : ',loading)
-
-   // !data===null && error === null
-   // ? setDatos(data)
-   // :null
-
-   // !data===null && error !== null
-   // ? setErrors(error)
-   // :null
-
    useEffect(() => {
-    // console.log('que estoy dentro !!!')
-   setTitle(title)
+      setTitle(title)
    },[])
-
-   useEffect(() => {
-     //  const {data0,error0} = myFetch(url)      
-      setDatos(data)
-   },[title])
-
-   // function cambia (e) {
-   //    setTitle(e)
-   //    console.log("--------------------->",e)
-   //   console.log('datagdaggdfasdfasdfsdfs0 : ',data)
-   // }
-
+   
+   const fetchProducts = () => {
+      setLoading(true)
+      setDatos([])
+      setErrors(null)
+      axios
+         //setLoading(true)
+        .get('https://www.reddit.com/r/'+title+'.json')
+        .then((res) => 
+       { const j = res.data
+          //console.log('datos recien recibidos : ',j);
+         setDatos(j)}
+        )
+        .catch((err) => {
+          console.error(err)
+          setErrors(err)
+        })
+        setLoading(false)
+    }
+   
    const cambia = (e) => {
-      console.log('iiiiiiiii',e)
-      setTitle(e)
+      title!==''
+      ? setTitle(e)
+      : null
    }
    
    return (
      <>
          <Context.Provider value={data}>
             <ButtonAppBar title={title} onChange={(e) => {cambia(e)} }/>
-            <BlockOfPosts d={data} e={error} l={loading} />           
+            <BlockOfPosts d={data} e={error} l={loading} t={title} />           
          </Context.Provider>
      </>
   )  

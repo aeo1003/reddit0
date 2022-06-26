@@ -5,6 +5,7 @@ import {Masonry} from '@mui/lab'
 import Datos from './Datos'
 import { makeStyles } from "@mui/styles"
 import { Context } from './App'
+
 //import ScrollDialog from './ScrollDialog'
 
 
@@ -60,50 +61,59 @@ export default function BlockOfPosts(props) {
     const er = props.e
     const lo = props.l
 
-    const value = props.d
+  //  const value = props.d
 
-    // console.log('data : ',da)
-    // console.log('error : ',er)
-    // console.log('loading : ',lo)
+    console.log('data----> : ',da)
+    console.log('error----> : ',er)
+    console.log('loading----> : ',lo)
 
-    if(lo===true){
-        return <div>loading</div>
-    }
-
-    return (
+    if(lo && !da){ return <div><h1>loading...</h1></div> } 
     
-    <>
-        <Box ml={2} mt={4}>
-             <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>
-            
-           {
-            // (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
-            (da?.data.children.length>0 && lo===false)  //? posts.map(post =>          
-              ?  da.data.children.map(item =>
-                <Box key={item.data.created}  xs={4} sm={4} md={2}>
-                    
-                        <Datos 
-                            key= {item.data.created}
-                            created={item.data.created}  
-                            perma={item.data.permalink}
-                            ups={item.data.ups}
-                            subject={item.data.title}
-                            author={item.data.author}
-                            num_comments={item.data.num_comments}
-                            utc={item.data.created_utc} 
-                            topic={item.data.link_flair_text}
-                        />                    
-                </Box> 
-            
-                )
-                 : <h1>No encuentro el sub </h1>
-            }
+    if(!lo && er){ return <div><h1>No lo encuentro.</h1></div> }
+    
+    
+    
+    // else if (er && props.title !== undefined){         
+    //         console.log('hay un error con ',props.title)
+    //         return <div mt='2rem' align='center'><h3>No se encuentra el subreddit {props.title} </h3></div>
+        
+    // } else {
+        if (da?.data?.children.length>0) {
+            console.log(lo)
+        return (
+    
+        <>
+            <Box ml={2} mt={4}>
+                <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>
                 
-            </Masonry>
-          </Box>
-         
-         
-    </>
-
-    )
+                {
+                    // (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
+                 //   (da?.data.children.length>0 && lo===false)  //? posts.map(post =>          
+                      da.data.children.map(item =>
+                        <Box key={item.data.created}  xs={4} sm={4} md={2}>
+                            
+                                <Datos 
+                                    key= {item.data.created}
+                                    created={item.data.created}  
+                                    perma={item.data.permalink}
+                                    ups={item.data.ups}
+                                    subject={item.data.title}
+                                    author={item.data.author}
+                                    num_comments={item.data.num_comments}
+                                    utc={item.data.created_utc} 
+                                    topic={item.data.link_flair_text}
+                                />                    
+                        </Box> 
+                    
+                        )
+                    //  <h1>No encuentro el sub </h1>
+                  }  
+                    
+                </Masonry>
+            </Box>
+            
+            
+        </>
+    )}
+    //}
 }
