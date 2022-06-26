@@ -12,7 +12,7 @@ import { Context } from './App';
 
 export default function ButtonAppBar(props) {
 
-  
+  const refNewSub = useRef()
   const subnames = ['Futurology','Technology','Singularity']
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +25,7 @@ export default function ButtonAppBar(props) {
   const [title, setTitle] = useState('')
   
 
-  const refNewSub = useRef()
+  
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -59,33 +59,23 @@ export default function ButtonAppBar(props) {
   const stopImmediatePropagation = (e) => {
     e.stopPropagation();
     e.preventDefault();
-  };
-  
+  }
 
   const handleMenuClick = (e) => {
   //  setNewsub('')
-    setAnchorEl(e.currentTarget)
-    
-  };
-
-
-
+    setAnchorEl(e.currentTarget)    
+  }
 
   const handleMenuClose = (e) => {
     stopImmediatePropagation(e)
     setAnchorEl(null)
-    setNewsub(e.currentTarget.innerText)
-    // const value = useContext(Context)
-    // console.log('y los datos son... ',value)
-
-    
-   //if (subnames.includes(e.currentTarget.innerText)) {     
-    //  props.onChange(e.currentTarget.innerText)
-   // }
-    
-  };
-
-
+   //if (e.currentTarget.innerText !== ''){
+      // console.log('oooooooooooooooooo',e.currentTarget.innerText)
+      setNewsub(e.currentTarget.innerText)
+      // props.onChange(newsub)
+    //}
+  }
+  
 const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
@@ -114,7 +104,7 @@ const handleKeyPress = (event) => {
         id="basic-menu"
         anchorEl={anchorEl}
         open={isMenuOpen}
-        onClose={handleMenuClose}
+        //onClose={handleMenuClose}
       >
 
         {(subnames.length > 0)
@@ -130,7 +120,7 @@ const handleKeyPress = (event) => {
           onKeyDown={e => e.stopPropagation()}>
            
             Add sub: <input ref={refNewSub} id='textinput' type="text" name="fname" 
-             onKeyUp={handleKeyPress}/>           
+             onKeyUp={handleKeyPress}/>
              {/* <input type="text" onclick="myFunction()" value="Submit"/> */}           
         </MenuItem>
       </Menu>

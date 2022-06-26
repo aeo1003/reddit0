@@ -32,30 +32,43 @@ export default function BlockOfPosts(props) {
 
     const [tempComments, setTempComments] = useState([]) 
 
-    const handleMenuClose = (e) => {
-        setChildData(false)
-    }
+    // const handleMenuClose = (e) => {
+    //     setChildData(false)
+    // }
 
-    React.useEffect(() => {      
-    },[tempComments])
+    // React.useEffect(() => {      
+    // },[tempComments])
  
-    const passData = (e) => {
-        setChildData(e)
-    }
+    // const passData = (e) => {
+    //     setChildData(e)
+    // }
 
-    const passComments = (e) => {
-        if (e && e.length > 0) {
-            setTempComments(e)
-           return e
-        }
-    }
+    // const passComments = (e) => {
+    //     if (e && e.length > 0) {
+    //         setTempComments(e)
+    //        return e
+    //     }
+    // }
 
    
 
 
-    const value = useContext(Context) // trae los datos del Context creado en App
-   // console.log('y los datos son... ',value)
+    // const value = useContext(Context) // trae los datos del Context creado en App
+   // console.log('y los datos son... ',value
+    //console.log('value : ',props.v)
+    const da = props.d
+    const er = props.e
+    const lo = props.l
 
+    const value = props.d
+
+    // console.log('data : ',da)
+    // console.log('error : ',er)
+    // console.log('loading : ',lo)
+
+    if(lo===true){
+        return <div>loading</div>
+    }
 
     return (
     
@@ -64,8 +77,9 @@ export default function BlockOfPosts(props) {
              <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>
             
            {
-            (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
-              ?  value.data.children.map(item =>
+            // (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
+            (da?.data.children.length>0 && lo===false)  //? posts.map(post =>          
+              ?  da.data.children.map(item =>
                 <Box key={item.data.created}  xs={4} sm={4} md={2}>
                     
                         <Datos 
@@ -78,12 +92,11 @@ export default function BlockOfPosts(props) {
                             num_comments={item.data.num_comments}
                             utc={item.data.created_utc} 
                             topic={item.data.link_flair_text}
-                        />
-                    
+                        />                    
                 </Box> 
             
                 )
-                 : <div>No existe ese subreddit</div>
+                 : <h1>No encuentro el sub </h1>
             }
                 
             </Masonry>
