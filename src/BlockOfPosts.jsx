@@ -61,6 +61,12 @@ export default function BlockOfPosts(props) {
     const er = props.e
     const lo = props.l
 
+    function UTCtoDate(utc) {
+        const d = new Date(utc*1000);
+        return d.toLocaleDateString();
+    }
+      
+
     if(lo){ return <div><h3>loading...</h3></div> } 
     
     if(!lo && er){ return <div><h3>No lo encuentro.</h3></div> }
@@ -82,7 +88,7 @@ export default function BlockOfPosts(props) {
                                     subject={item.data.title}
                                     author={item.data.author}
                                     num_comments={item.data.num_comments}
-                                    utc={item.data.created_utc} 
+                                    utc={UTCtoDate(item.data.created_utc)} 
                                     topic={item.data.link_flair_text}
                                 />                    
                         </Box>                     
