@@ -21,8 +21,7 @@ function App() {
   
    // const refBar = useRef()
    const {data,error,loading} = useFetch(url)
-   console.log('Loading ahora mismo....',loading)
-   
+  
    useEffect(() => {
       setTitle(title)
    },[])
