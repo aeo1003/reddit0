@@ -69,11 +69,11 @@ export default function ButtonAppBar(props) {
   const handleMenuClose = (e) => {
     stopImmediatePropagation(e)
     setAnchorEl(null)
-   //if (e.currentTarget.innerText !== ''){
-      // console.log('oooooooooooooooooo',e.currentTarget.innerText)
       setNewsub(e.currentTarget.innerText)
-      // props.onChange(newsub)
-    //}
+  }
+
+  const onMenuClose = () => {
+    setAnchorEl(null)
   }
   
 const handleKeyPress = (event) => {
@@ -104,7 +104,7 @@ const handleKeyPress = (event) => {
         id="basic-menu"
         anchorEl={anchorEl}
         open={isMenuOpen}
-        //onClose={handleMenuClose}
+        onClose={onMenuClose}
       >
 
         {(subnames.length > 0)
@@ -119,14 +119,11 @@ const handleKeyPress = (event) => {
         <MenuItem onClickCapture={stopImmediatePropagation}
           onKeyDown={e => e.stopPropagation()}>
            
-            Add sub: <input ref={refNewSub} id='textinput' type="text" name="fname" 
+            Add sub <input style={{marginLeft:'1rem'}} ref={refNewSub} id='textinput' type="text" name="fname" 
              onKeyUp={handleKeyPress}/>
-             {/* <input type="text" onclick="myFunction()" value="Submit"/> */}           
         </MenuItem>
       </Menu>
-
     </Toolbar>
   </AppBar>
-// </div>
 )
 }

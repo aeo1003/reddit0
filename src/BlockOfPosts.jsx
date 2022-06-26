@@ -61,37 +61,19 @@ export default function BlockOfPosts(props) {
     const er = props.e
     const lo = props.l
 
-  //  const value = props.d
-
-    console.log('data----> : ',da)
-    console.log('error----> : ',er)
-    console.log('loading----> : ',lo)
-
-    if(lo){ return <div><h1>loading...</h1></div> } 
+    if(lo){ return <div><h3>loading...</h3></div> } 
     
-    if(!lo && er){ return <div><h1>No lo encuentro.</h1></div> }
+    if(!lo && er){ return <div><h3>No lo encuentro.</h3></div> }
     
-    
-    
-    // else if (er && props.title !== undefined){         
-    //         console.log('hay un error con ',props.title)
-    //         return <div mt='2rem' align='center'><h3>No se encuentra el subreddit {props.title} </h3></div>
-        
-    // } else {
         if (da?.data?.children.length>0) {
             console.log(lo)
-        return (
-    
+        return (    
         <>
             <Box ml={2} mt={4}>
-                <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>
-                
-                {
-                    // (value !== null && value !== 'undefined' && value.data.children.length > 0)  //? posts.map(post =>          
-                 //   (da?.data.children.length>0 && lo===false)  //? posts.map(post =>          
+                <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>                
+                {                          
                       da.data.children.map(item =>
-                        <Box key={item.data.created}  xs={4} sm={4} md={2}>
-                            
+                        <Box key={item.data.created}  xs={4} sm={4} md={2}>                            
                                 <Datos 
                                     key= {item.data.created}
                                     created={item.data.created}  
@@ -103,17 +85,11 @@ export default function BlockOfPosts(props) {
                                     utc={item.data.created_utc} 
                                     topic={item.data.link_flair_text}
                                 />                    
-                        </Box> 
-                    
+                        </Box>                     
                         )
-                    //  <h1>No encuentro el sub </h1>
-                  }  
-                    
+                  }                      
                 </Masonry>
-            </Box>
-            
-            
+            </Box>            
         </>
-    )}
-    //}
+        )}
 }
