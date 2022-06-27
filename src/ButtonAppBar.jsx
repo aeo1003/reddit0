@@ -17,6 +17,8 @@ export default function ButtonAppBar(props) {
   const subnames = ['Futurology','Technology','Singularity']
 
   const [anchorEl, setAnchorEl] = React.useState(false)
+
+
   const [anchorSortEl, setAnchorSortEl] = React.useState(false)
   const isMenuOpen = Boolean(anchorEl)
   const isSortMenuOpen = Boolean(anchorSortEl)
@@ -69,7 +71,7 @@ export default function ButtonAppBar(props) {
 
   const handleMenuClose = (e) => {
     stopImmediatePropagation(e)
-    setAnchorEl(false)
+    setAnchorEl(null)
       setNewsub(e.currentTarget.innerText)
   }
 
@@ -91,7 +93,7 @@ export default function ButtonAppBar(props) {
     }
 
   const onMenuClose = (e) => {
-      setAnchorEl(false)
+      setAnchorEl(null)
    // }
   }
 
@@ -103,14 +105,15 @@ export default function ButtonAppBar(props) {
 const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
-    setAnchorEl(false)
+    setAnchorEl(null)
     setNewsub(refNewSub.current.value)
   }
 }
 
   return (
+
    <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active }  position="sticky" color="primary">
-  {/* <AppBar position="sticky" color="primary"> */}
+        {/* <AppBar position="sticky" color="primary"> */}
     <Toolbar>
       <IconButton
         id='menu'
@@ -129,7 +132,7 @@ const handleKeyPress = (event) => {
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
-        open={isSortMenuOpen}
+        open={isMenuOpen}
         onClose={onMenuClose}
         anchorOrigin={{
           vertical: "bottom",
@@ -163,7 +166,7 @@ const handleKeyPress = (event) => {
 
 
 
-{/* 
+
 
       <IconButton
         size="large"
@@ -198,7 +201,7 @@ const handleKeyPress = (event) => {
           </MenuItem>
       </Menu>
 
- */}
+
 
 
 
