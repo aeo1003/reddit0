@@ -44,9 +44,9 @@ const theme = createTheme({
 
 export default function Datos(props) {
   
-const openSite = (url) => {
+const openSite = () => {
   //useStyles()
-  window.open(url)
+  window.open(props.url)
   }
 
 //const classes = useStyles()   
@@ -72,14 +72,6 @@ const [comments, setComments] = React.useState([])
      const min = 0;
      const max = colores.length-1;
 
-
-  //    const handleCommentsClick = (e) => {
-  //     const url = 'https://www.reddit.com/r/news.json'
-  //     const {data,error,loading} = useFetch(url)
-  //     console.log(data)
-  //     console.log(error)
-  //     console.log(loading)
-  // }
      
  
      function randomRange(myMin, myMax) {
@@ -106,8 +98,8 @@ const [comments, setComments] = React.useState([])
         </Box>
     </Paper>
     
-    <Paper style={{backgroundColor: 'rgb(231, 236, 229)'}}>
-        <Box p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
+    <Paper  style={{backgroundColor: 'rgb(231, 236, 229)'}}>
+        <Box onClick={openSite} style={{cursor:'pointer'}} p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
             <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
                 <Typography mr={1}               
                             fontWeight='500' 

@@ -60,19 +60,26 @@ export default function BlockOfPosts(props) {
     const da = props.d
     const er = props.e
     const lo = props.l
+    const st = props.s
+    
+   // console.log('error : ',er)
+   // console.log(typeof st)
+   
 
     function UTCtoDate(utc) {
         const d = new Date(utc*1000);
         return d.toLocaleDateString();
     }
-      
+    
+  //  console.log('----> er : ',er)
 
-    if(lo){ return <div><h3>loading...</h3></div> } 
+    if(lo){ return <div style={{padding:'2rem'}} ><h3>loading...</h3></div> } 
+
+   
+    if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3>No lo encuentro.</h3></div> }
     
-    if(!lo && er){ return <div><h3>No lo encuentro.</h3></div> }
-    
-        if (da?.data?.children.length>0) {
-            console.log(lo)
+    if (da?.data?.children.length>0) {
+      //  if (st==='200') {
         return (    
         <>
             <Box ml={2} mt={4}>
@@ -90,6 +97,7 @@ export default function BlockOfPosts(props) {
                                     num_comments={item.data.num_comments}
                                     utc={UTCtoDate(item.data.created_utc)} 
                                     topic={item.data.link_flair_text}
+                                    url={item.data.url}
                                 />                    
                         </Box>                     
                         )

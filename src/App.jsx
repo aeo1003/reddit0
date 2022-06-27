@@ -17,10 +17,10 @@ function App() {
 
    const [title, setTitle] = useState('Technology')
    
-   const url = 'https://www.reddit.com/r/'+title+'.json'
+   const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=30'
   
    // const refBar = useRef()
-   const {data,error,loading} = useFetch(url)
+   const {data,error,loading,status} = useFetch(url)
   
    useEffect(() => {
       setTitle(title)
@@ -32,7 +32,7 @@ function App() {
       setErrors(null)
       axios
          //setLoading(true)
-        .get('https://www.reddit.com/r/'+title+'.json')
+        .get('https://www.reddit.com/r/'+title+'/hot.json?limit=100')
         .then((res) => 
        { const j = res.data
           //console.log('datos recien recibidos : ',j);
@@ -55,7 +55,7 @@ function App() {
      <>
          <Context.Provider value={data}>
             <ButtonAppBar title={title} onChange={(e) => {cambia(e)} }/>
-            <BlockOfPosts d={data} e={error} l={loading} t={title} />           
+            <BlockOfPosts d={data} e={error} l={loading} t={title} s={status} />           
          </Context.Provider>
      </>
   )  
