@@ -106,7 +106,7 @@ const [comments, setComments] = React.useState([])
                             fontSize='0.7rem' 
                             variant="body1">{props.subject}
                 </Typography>
-              </Box>
+            </Box>
         </Box>  
         
         <Box>
