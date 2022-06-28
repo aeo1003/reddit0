@@ -42,21 +42,41 @@ function App() {
       
       if(datos!==null)
         { 
-         if (e === 'C') {         
-            const sortedData = JSON.parse(JSON.stringify(datos))   //AQUI SE USA DATA!!!
-            sortedData?.data?.children?.sort((a,b) => b.data.num_comments - a.data.num_comments); // b - a for reverse sort
+         if (e === 'Ddes') {         
+            const sortedData = JSON.parse(JSON.stringify(datos))
+            sortedData?.data?.children?.sort((a,b) => Number(b.data.created) - Number(a.data.created)); // b - a for reverse sort
             setDatos(sortedData)
+            }
+
+            if (e === 'Dasc') {         
+               const sortedData = JSON.parse(JSON.stringify(datos))
+               sortedData?.data?.children?.sort((a,b) => Number(a.data.created) - Number(b.data.created)); // b - a for reverse sort
+               setDatos(sortedData)
             } 
+//------------------------------------------------------------------------------
+            if (e === 'Cdes') {         
+               const sortedData = JSON.parse(JSON.stringify(datos))   //AQUI SE USA DATA!!!
+               sortedData?.data?.children?.sort((a,b) => b.data.num_comments - a.data.num_comments); // b - a for reverse sort
+               setDatos(sortedData)
+               } 
+            if (e === 'Casc') {         
+               const sortedData = JSON.parse(JSON.stringify(datos))   //AQUI SE USA DATA!!!
+               sortedData?.data?.children?.sort((a,b) => a.data.num_comments - b.data.num_comments); // b - a for reverse sort
+               setDatos(sortedData)
+               } 
          
 
-         if (e === 'V') {
-            const sortedData = JSON.parse(JSON.stringify(datos))
-             //  if (sortedData?.data?.length>0) {
-                  sortedData?.data?.children?.sort((a,b) => b.data.ups - a.data.ups); // b - a for reverse sort
-                  setDatos(sortedData)         
-              // }
+            if (e === 'Vdes') {
+               const sortedData = JSON.parse(JSON.stringify(datos))
+                     sortedData?.data?.children?.sort((a,b) => b.data.ups - a.data.ups); // b - a for reverse sort
+                     setDatos(sortedData)         
             } 
-      }
+            if (e === 'Vasc') {
+               const sortedData = JSON.parse(JSON.stringify(datos))
+                     sortedData?.data?.children?.sort((a,b) => a.data.ups - b.data.ups); // b - a for reverse sort
+                     setDatos(sortedData)         
+            } 
+         }
    }
    
    return (

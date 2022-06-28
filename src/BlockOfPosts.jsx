@@ -71,7 +71,7 @@ export default function BlockOfPosts(props) {
         return d.toLocaleDateString();
     }
     
-    console.log('----> st : ',st)
+   // console.log('----> st : ',st)
 
     if(lo){ return <div style={{padding:'2rem'}} ><h3>loading...</h3></div> } 
 
