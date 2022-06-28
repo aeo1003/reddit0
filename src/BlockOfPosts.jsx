@@ -62,7 +62,7 @@ export default function BlockOfPosts(props) {
     const lo = props.l
     const st = props.s
     
-   // console.log('error : ',er)
+    //console.log('ups del 3 en blockofposts : ',da) //.data.children[3].data.ups)
    // console.log(typeof st)
    
 

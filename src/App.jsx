@@ -18,44 +18,50 @@ function App() {
    const [title, setTitle] = useState('Technology')
    
    const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=30'
-  
-   // const refBar = useRef()
-   const {data,error,loading,status} = useFetch(url)
+   const {data,error,loading,thestate} = useFetch(url)
+   
+   const [datos,setDatos] = useState([])
+
+   useEffect(() => {
+      setDatos(data)    
+   },[url,data])
   
    useEffect(() => {
       setTitle(title)
-   },[])
-   
-   const fetchProducts = () => {
-      setLoading(true)
       setDatos([])
-      setErrors(null)
-      axios
-         //setLoading(true)
-        .get('https://www.reddit.com/r/'+title+'/hot.json?limit=100')
-        .then((res) => 
-       { const j = res.data
-          //console.log('datos recien recibidos : ',j);
-         setDatos(j)}
-        )
-        .catch((err) => {
-          console.error(err)
-          setErrors(err)
-        })
-        setLoading(false)
-    }
+   },[])
+
    
    const cambia = (e) => {
       title!==''
       ? setTitle(e)
       : null
    }
+
+   const sortBy = (e) => {
+      
+      if(datos!==null)
+        { 
+         if (e === 'C') {         
+            const sortedData = JSON.parse(JSON.stringify(data))
+            sortedData.data.children.sort((a,b) => b.data.num_comments - a.data.num_comments); // b - a for reverse sort
+            setDatos(sortedData)
+            } 
+         
+
+         if (e === 'V') {
+            const sortedData = JSON.parse(JSON.stringify(data))
+            sortedData.data.children.sort((a,b) => b.data.ups - a.data.ups); // b - a for reverse sort
+            setDatos(sortedData)         
+            } 
+      }
+   }
    
    return (
      <>
-         <Context.Provider value={data}>
-            <ButtonAppBar title={title} onChange={(e) => {cambia(e)} }/>
-            <BlockOfPosts d={data} e={error} l={loading} t={title} s={status} />           
+         <Context.Provider value={datos}>
+            <ButtonAppBar title={title} onChangeSort={(e)=>{sortBy(e)}} onChange={(e) => {cambia(e)} }/>
+            <BlockOfPosts d={datos} e={error} l={loading} t={title}  />
          </Context.Provider>
      </>
   )  

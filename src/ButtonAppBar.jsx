@@ -29,17 +29,19 @@ export default function ButtonAppBar(props) {
   const [temas, setTemas] = useState([])
   const [title, setTitle] = useState('')
   
-
+  const [sortedBy, setSortedBy] = useState(null)
+  
+  useEffect(() => {
+    props.onChange(newsub)
+    setSortedBy(null)
+  },[newsub])
   
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("refresh prevented");
-  };
-
   useEffect(() => {
-    props.onChange(newsub)    
-  },[newsub])
+    setAnchorSortEl(null)
+    stopImmediatePropagation
+    props.onChangeSort(sortedBy)
+  }, [sortedBy])
 
 
 
@@ -66,7 +68,11 @@ export default function ButtonAppBar(props) {
     e.preventDefault();
   }
 
-
+const handleClickSortedBy = (e,t) => {
+  stopImmediatePropagation(e)
+  setAnchorSortEl(null)
+  setSortedBy(t)
+}
 
 
   const handleMenuClose = (e) => {
@@ -77,18 +83,14 @@ export default function ButtonAppBar(props) {
 
   const handleSortMenuClose = (e) => {
     stopImmediatePropagation(e)
-     setAnchorSortEl(false)
-  //     setNewsub(e.currentTarget.innerText)
+     setAnchorSortEl(null)
    }
    
    const handleMenuClick = (e) => {
-    //  setNewsub('')
-    //console.log(e.currentTarget)
       setAnchorEl(e.currentTarget)    
     }
 
    const handleSortMenuClick = (e) => {
-    //  setNewsub('')
       setAnchorSortEl(e.currentTarget)    
     }
 
@@ -112,15 +114,15 @@ const handleKeyPress = (event) => {
 
   return (
 
-   <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active }  position="sticky" color="primary">
-        {/* <AppBar position="sticky" color="primary"> */}
+   <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active }  
+           position="sticky" color="primary">
     <Toolbar>
       <IconButton
         id='menu'
         size="large"
         edge="start"
         color="inherit"
-        aria-label="menu cambio sub"
+        aria-label="icono-menu-cambio-sub"
         sx={{ mr: 2 }}
         onClick={(e) => handleMenuClick(e)}
       >
@@ -130,7 +132,7 @@ const handleKeyPress = (event) => {
       <Typography variant='h4'> {props.title}</Typography>
 
       <Menu
-        id="basic-menu"
+        id="menu-camio-sub"
         anchorEl={anchorEl}
         open={isMenuOpen}
         onClose={onMenuClose}
@@ -159,21 +161,12 @@ const handleKeyPress = (event) => {
 
 
 
-
-
-
-
-
-
-
-
-
       <IconButton
         size="large"
         edge="start"
         color="inherit"
-        aria-label="menuS"
-        aria-controls='Control'
+        aria-label="icono-menu-ordenar"
+        //aria-controls='Control'
         sx={{ ml: 2 }}
         onClick={(e) => handleSortMenuClick(e)}
       >
@@ -185,39 +178,18 @@ const handleKeyPress = (event) => {
         anchorEl={anchorSortEl}
         open={isSortMenuOpen}
         onClose={onSortMenuClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
+        
       >
-          <MenuItem sx={{color: '#888'}} onClick={(e) => handleSortMenuClose(e)}>
-           <Typography variant='div'> uno</Typography>
+          <MenuItem sx={{color: '#888'}} onClick={(e) => {handleClickSortedBy(e,'D')}}>
+           <Typography variant='div'> By Date</Typography>
           </MenuItem>
-          <MenuItem sx={{color: '#888'}} onClick={(e) => handleSortMenuClose(e)}>
-           <Typography variant='div'> dos</Typography>
+          <MenuItem sx={{color: '#888'}} onClick={(e) => {handleClickSortedBy(e,'V')}}>
+           <Typography variant='div'> By Votes</Typography>
           </MenuItem>
-          <MenuItem sx={{color: '#888'}} onClick={(e) => handleSortMenuClose(e)}>
-           <Typography variant='div'> tres</Typography>
+          <MenuItem sx={{color: '#888'}} onClick={(e) => {handleClickSortedBy(e,'C')}}>
+           <Typography variant='div'> By Comments</Typography>
           </MenuItem>
       </Menu>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
 
     </Toolbar>
   </AppBar>

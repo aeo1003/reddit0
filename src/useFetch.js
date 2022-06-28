@@ -2,6 +2,20 @@ import { useEffect, useState } from "react"
 // import axios from "axios"
 
 
+const handleData = (callback) => {
+    if (data){
+      callback(data);
+      setData(null);
+    }
+  }
+
+  const handleError = (callback) => {
+    if (error){
+      callback(error);
+      setError(null);
+    }
+  }
+
 export default function useFetch(url){
     //console.log('la url es : ',url)
     const [data,setData] = useState(null)
@@ -31,12 +45,9 @@ export default function useFetch(url){
         )()
         //setLoading(false)
     }, [url])
-    // error !== null
-    // ? console.log(error.response)
-    // : null
-     //console.log('data es  : ',data)
-    
-     return { data, error, loading, status } 
+       // console.log('-----',data)
+        return { data, handleData, error, handleError, loading, status } 
+    // }
 
 }
 
