@@ -3,8 +3,27 @@ import React, { useState, useEffect, useContext } from 'react'
 import {Box,Grid} from '@mui/material'
 import {Masonry} from '@mui/lab'
 import Datos from './Datos'
+import {navbar,postcards} from './data'
 import { makeStyles } from "@mui/styles"
 import { Context } from './App'
+import baseTheme from "./styles/styles";
+
+
+import "@fontsource/roboto"; // Loading Roboto font. MUI was designed with this font in mind.
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+
+// // Define theme settings
+// const light = {
+//     palette: {
+//       mode: "light",
+//     },
+//   };
+  
+//   const dark = {
+//     palette: {
+//       mode: "dark",
+//     },
+//   };
 
 //import ScrollDialog from './ScrollDialog'
 
@@ -14,6 +33,11 @@ import { Context } from './App'
 
 
 export default function BlockOfPosts(props) {
+
+    const [theme, setTheme] = useState(postcards)
+
+
+
 
    const [childData, setChildData] = useState(false)
 
@@ -82,6 +106,7 @@ export default function BlockOfPosts(props) {
       //  if (st==='200') {
         return (    
         <>
+         <ThemeProvider theme={theme}>
             <Box ml={2} mt={4}>
                 <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>                
                 {                          
@@ -103,7 +128,8 @@ export default function BlockOfPosts(props) {
                         )
                   }                      
                 </Masonry>
-            </Box>            
-        </>
+            </Box>
+        </ThemeProvider>    
+    </>
         )}
 }
