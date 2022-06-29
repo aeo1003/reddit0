@@ -5,15 +5,59 @@ import useFetch from './useFetch'
 import ButtonAppBar from './ButtonAppBar'
 import Datos from './Datos'
 import BlockOfPosts from './BlockOfPosts'
+import {navbar, postcards} from './data'
 // import { SettingsSystemDaydreamTwoTone } from '@mui/iconsmaterial'
 import { myFetch } from './myFetch'
 import axios from "axios"
 
 
 
+import "@fontsource/roboto"; // Loading Roboto font. MUI was designed with this font in mind.
+import {
+  Card,
+  CardHeader,
+  Switch,
+  CardContent,
+  Box,
+  Container,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  CssBaseline,
+} from "@mui/material";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+
+
+// Define theme settings
+const light = {
+   palette: {
+     mode: "light",
+   },
+ };
+ 
+ const dark = {
+   palette: {
+     mode: "dark",
+   },
+ };
+
+
 export const Context = createContext('default value')
 
 function App() {
+
+// The light theme is used by default
+const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+// This function is triggered when the Switch component is toggled
+const changeTheme = () => {
+  setIsDarkTheme(!isDarkTheme);
+};
+
+
+
+
 
    const [title, setTitle] = useState('Technology')
    
@@ -78,13 +122,27 @@ function App() {
             } 
          }
    }
+
+   // 2effee
    
    return (
      <>
+        
          <Context.Provider value={datos}>
-            <ButtonAppBar title={title} onChangeSort={(e)=>{sortBy(e)}} onChange={(e) => {cambia(e)} }/>
-            <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} />
+            
+         <ThemeProvider theme={createTheme(postcards)}>          
+         {/* <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>           */}
+              
+               
+               
+            <ButtonAppBar title={title}   
+                          onChangeSort={ (e) => {sortBy(e)} } onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>               
+            
+               <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} />
+            </ThemeProvider>
          </Context.Provider>
+        
+        
      </>
   )  
 }
