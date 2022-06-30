@@ -125,7 +125,7 @@ const openSite = () => {
                 <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant="overline"> {props.ups} </Typography>
           </Box>
 
-              <Typography sx={{fontSize:'0.8rem'}} variant="overline" > {props.topic} </Typography>          
+              <Typography style={{ fontWeight: 900 }} sx={{fontSize:'1.1rem'}} > {props.topic} </Typography>          
         </Box>
     </Paper>
     

@@ -374,7 +374,7 @@ stopImmediatePropagation(event)
         <Box display='flex' sx={{ flexDirection: 'column' }} >
           <Box sx={{flexDirection: 'row'}} >
             <IconButton onClick={(e) => {handleClickSortedBy(e,'Dasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By Date</Typography>
+            <Typography variant='overline'> By-Date</Typography>
             <IconButton onClick={(e) => {handleClickSortedBy(e,'Ddes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
           </Box>
           <Box >
