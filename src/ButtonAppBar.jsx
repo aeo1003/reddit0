@@ -221,7 +221,7 @@ const handleClickSortedBy = (e,t) => {
   }
   
 const handleKeyPress = (event) => {
-stopImmediatePropagation(event)
+
   if(event.key === 'Enter'){
     setAnchorEl(null)
     setNewsub(refNewSub.current.value)
@@ -233,66 +233,68 @@ stopImmediatePropagation(event)
      {/* <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}> */}
 
    <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active } position="sticky" >
-    <Toolbar className='toolbar' sx={{ justifyContent: "space-between", paddingRight:'0px', paddingLeft:'12px' }}>
-  
-      <IconButton
-        id='menu'
-        size="large"
-        edge="start"        
-        aria-label="icono-menu-cambio-sub"
-        sx={{ mr: 2}}
-        onClick={(e) => handleMenuClick(e)}
-      >
-        <MenuIcon sx={{mr: 2}}/>
-      </IconButton>
+    <Toolbar className='toolbar' sx={{ background:'darkgray', justifyContent: "space-between", paddingRight:'0px', paddingLeft:'12px' }}>
+        <Box display='flex' alignItems='center'>
+            <IconButton
+              id='menu'
+              size="large"
+              edge="start"        
+              aria-label="icono-menu-cambio-sub"
+            // sx={{ mr: 2}}
+              onClick={(e) => handleMenuClick(e)}
+            >
+              <MenuIcon sx={{mr: 2}}/>
+            </IconButton>
 
-      <Typography sx={{color:'#222'}} variant='h5'> {props.title}</Typography>
+            <Typography sx={{color:'#222'}} variant='h5'> {props.title}</Typography>
 
-      <Menu
-        id="menu-camio-sub"
-        anchorEl={anchorEl}
-        open={isMenuOpen}
-        onClose={onMenuClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-      >
+            <Menu
+              id="menu-camio-sub"
+              anchorEl={anchorEl}
+              open={isMenuOpen}
+              onClose={onMenuClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
 
-        {(subnames.length > 0)
-        ? subnames.map((sub, index) => (
-          <MenuItem sx={{color: '#222'}} key={index} onClick={(e) => handleMenuClose(e)}>
-           <Typography variant='overline'> {sub}</Typography>
-          </MenuItem>
-        ))
-        : null        
-        }
-        <Box display='flex' direction='row' alignItems='center'>
-          <Box display='flex' direction='row' alignItems='center'>
-              <Icon sx={{cursor:'none'}} >
-                <KeyboardArrowRightRoundedIcon />
-              </Icon>            
-          </Box>
-          <input style={{maxWidth:'80%'}} ref={refNewSub} id='textinput' type="text" name="fname" 
-                  onKeyUp={handleKeyPress}/>
-        </Box>
-      </Menu>
+              {(subnames.length > 0)
+              ? subnames.map((sub, index) => (
+                <MenuItem sx={{color: '#222'}} key={index} onClick={(e) => handleMenuClose(e)}>
+                    <Typography variant='overline'> {sub}</Typography>
+                </MenuItem>
+              ))
+              : null        
+              }
 
+              <Box display='flex' direction='row' alignItems='center'>
+                <Box display='flex' direction='row' alignItems='center'>
+                    <Icon sx={{cursor:'none'}} >
+                      <KeyboardArrowRightRoundedIcon />
+                    </Icon>            
+                </Box>
+              
+                    <input style={{maxWidth:'80%'}} ref={refNewSub} id='textinput' type="text" name="fname" 
+                            onKeyUp={handleKeyPress} onKeyDown={e=> e.stopPropagation()}/>
+              </Box>
 
+            </Menu>
+        
 
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="icono-menu-ordenar"
-        //aria-controls='Control'
-        sx={{ ml: 2 }}
-        onClick={(e) => handleSortMenuClick(e)}
-      >
-        <FilterListOutlinedIcon />
-      </IconButton>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="icono-menu-ordenar"
+              //aria-controls='Control'
+              sx={{ ml: 2 }}
+              onClick={(e) => handleSortMenuClick(e)}
+            >
+              <FilterListOutlinedIcon />
+            </IconButton>
 
-
+            </Box>
 
 
          

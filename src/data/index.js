@@ -70,6 +70,9 @@ export const theme1 = `{
   };
 
 
+
+
+
   export const postcards = {
     palette: {
       primary: {
@@ -97,11 +100,48 @@ export const theme1 = `{
             }
           }
         },
+        MuiTypography: {
+          styleOverrides: {
+              root: {
+               // background: "#aabbccdd"
+               // color: '#fff'
+              }
+            }
+          },
       MuiPaper: {
         styleOverrides: {
           root: {
            // background: "#aabbccdd"
-            background: '#dda8e8'
+            background: '#ddd'
+          }
+        },
+        defaultProps: {
+          elevation: 6
+        }
+      }
+    }
+  };
+
+
+
+
+
+  export const mainApp = {
+    palette: {
+      primary: {
+        main: "#deedaa"
+      },
+      secondary: {
+        main: "#aef0f0"
+      }
+    },
+    components: {
+     
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+           // background: "#aabbccdd"
+            background: '#bbb'
           }
         },
         defaultProps: {

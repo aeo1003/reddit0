@@ -108,7 +108,7 @@ export default function BlockOfPosts(props) {
         <>
          <ThemeProvider theme={theme}>
             <Box ml={2} mt={4}>
-                <Masonry columns={{ xs: 1, sm: 3, md:4, lg:4 }} spacing={2}>                
+                <Masonry columns={{ xs: 1, sm: 2, md:3, lg:4 }} spacing={2}>                
                 {                          
                       da.data.children.map(item =>
                         <Box key={item.data.created}  xs={4} sm={4} md={2}>                            

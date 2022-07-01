@@ -5,7 +5,7 @@ import useFetch from './useFetch'
 import ButtonAppBar from './ButtonAppBar'
 import Datos from './Datos'
 import BlockOfPosts from './BlockOfPosts'
-import {navbar, postcards} from './data'
+import {mainApp, navbar, postcards} from './data'
 // import { SettingsSystemDaydreamTwoTone } from '@mui/iconsmaterial'
 import { myFetch } from './myFetch'
 import axios from "axios"
@@ -24,6 +24,7 @@ import {
   FormGroup,
   FormControlLabel,
   CssBaseline,
+  Paper
 } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles"
@@ -126,24 +127,21 @@ const changeTheme = () => {
    // 2effee
    
    return (
-     <>
+      <ThemeProvider theme={createTheme(mainApp)} > 
+     <Paper>
         
-         <Context.Provider value={datos}>
+         <Context.Provider value={datos}>           
             
-         <ThemeProvider theme={createTheme(postcards)}>          
-         {/* <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>           */}
-              
-               
-               
-            <ButtonAppBar title={title}   
-                          onChangeSort={ (e) => {sortBy(e)} } onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>               
-            
+            <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
+            <ThemeProvider theme={createTheme(postcards)} >          
                <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} />
-            </ThemeProvider>
+            </ThemeProvider>     
+              
          </Context.Provider>
         
         
-     </>
+     </Paper>
+     </ThemeProvider>  
   )  
 }
 

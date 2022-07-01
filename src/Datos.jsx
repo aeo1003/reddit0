@@ -114,23 +114,25 @@ const openSite = () => {
     
     <ThemeProvider theme={theme}>
       {/* <Paper elevation={1} style={{backgroundColor: rndcol}}> */}
-      <Paper elevation={1} >
+      <Box sx={{background:'#ccc', borderRadius:'10px 10px 0px 0px'}}>
           
         <Box p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', 
               justifyContent:'space-between' }}> 
              
           <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', 
               justifyContent:'space-between' }}>
-                <ThumbUpAltOutlinedIcon sx={{fontSize:'medium'}} />
-                <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant="overline"> {props.ups} </Typography>
+                
+                  <ThumbUpAltOutlinedIcon sx={{fontSize:'medium'}} />
+                  <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant=""> {props.ups} </Typography>
+                
           </Box>
 
               <Typography style={{ fontWeight: 900 }} sx={{fontSize:'1.1rem'}} > {props.topic} </Typography>          
         </Box>
-    </Paper>
+      </Box>
     
     {/* <Paper  style={{backgroundColor: 'rgb(231, 236, 229)'}}> */}
-    <Paper style={{backgroundColor: 'rgb(231, 236, 229)'}}>
+    <Box style={{backgroundColor: '#ddd'}}> 
         <Box onClick={openSite} style={{cursor:'pointer'}} p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
             <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
                 <Typography mr={1}               
@@ -160,7 +162,7 @@ const openSite = () => {
               </IconButton>
           </Box>
         </Box>
-      </Paper>
+      </Box>
     </ThemeProvider>
     
     </>
