@@ -126,6 +126,8 @@ export const theme1 = `{
         },
       },
 
+
+
       MuiTypography: {
         styleOverrides: {
             root: {
@@ -133,6 +135,8 @@ export const theme1 = `{
             }
           }        
     },
+
+
 
       MuiCard: {
         styleOverrides: {
@@ -146,6 +150,8 @@ export const theme1 = `{
         },
       },
 
+
+
       MuiIconButton: {
         styleOverrides: {
             colorInherit: {                
@@ -154,7 +160,18 @@ export const theme1 = `{
         },
         defaultProps: {
             color: "inherit",
-        },
+        }
+      },
+
+
+
+       MuiIcon: {
+        styleOverrides: {
+            root: {
+              // background: "#aabbccdd"
+              color: '#F2F4A6'
+            }
+        }
       },
       
     
@@ -207,9 +224,18 @@ export const theme1 = `{
               // background: "#aabbccdd"
               color: '#222'              
             }
-          }
+          }        
+      },
+      MuiIcon: {
+        styleOverrides: {
+            root: {
+              // background: "#aabbccdd"
+              color: '#222'
+            }
         }
+      }
     }
+      
   };
 
 
@@ -254,12 +280,31 @@ export const theme1 = `{
             elevation: 6
           }
         },
+        MuiIconButton: {
+          styleOverrides: {
+              root: {
+                // background: "#aabbccdd"
+                color: '#fff'
+              }
+          }
+        },
         MuiIcon: {
           styleOverrides: {
-            root: {
-             background: "#aabbccdd",
-              color: '#ddd'
-            }
+              root: {
+                // background: "#aabbccdd"
+                color: '#fff'
+              }
+          }
+        },
+        MuiDivider: {
+          styleOverrides: {
+              root: {
+                // background: "#aabbccdd"
+             
+                  background: '#F2F4A6',
+                  
+                
+              }
           }
         }
       }

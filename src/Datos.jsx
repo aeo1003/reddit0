@@ -1,5 +1,5 @@
 import React, {useContext,useState,useEffect} from 'react'
-import { Box,Divider,Card, Grid, Paper, Typography, IconButton} from '@mui/material/'
+import { Box,Divider,Card, Grid,Icon, Paper, Typography, IconButton} from '@mui/material/'
 // import * as API from "../services/GetInfo"
 // import { makeStyles } from "@mui/styles"
 import { createTheme, ThemeProvider } from "@mui/material"
@@ -53,8 +53,9 @@ const openSite = () => {
             
         <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', 
             justifyContent:'space-between' }}>
-              
+              <Icon>
                 <ThumbUpAltOutlinedIcon sx={{fontSize:'medium'}} />
+              </Icon>
                 <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant=""> {props.ups} </Typography>
               
         </Box>
@@ -64,7 +65,7 @@ const openSite = () => {
       
     </Card>
  
-    <Paper> 
+    <Paper sx={{borderRadius:'0px 0px 10px 10px'}}> 
 
         <Box onClick={openSite} style={{cursor:'pointer'}} p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
             <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
@@ -77,23 +78,28 @@ const openSite = () => {
             {props.hint === 'image' ? <img width='80' src={props.thumbnail || props.url} /> : null }
         </Box>
         
-        <Box>
-          <Divider />
+        <Box >
+          
+          <Box><Divider /></Box>
           <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>
               <Typography sx={{fontSize:'0.7rem', ml:'0.5rem'}} variant="overline" > {props.utc} </Typography>
+              
+              
+             <Box>
+                <Typography sx={{fontSize:'0.7rem'}}
+                        mr={1}
+                        variant="overline">{props.num_comments}
+                    </Typography>
+                
+                <IconButton
+                  sx={{mr:'0.5'}}
+                  size="small"                                 
+                  onClick={(e) => handleCommentsClick(e)}
+                >                    
+                    <ForumOutlinedIcon sx={{fontSize:'medium'}} />
+                </IconButton>
+             </Box>
 
-              <IconButton
-                size="small"
-                color="inherit"
-                aria-label="menu"
-                onClick={(e) => handleCommentsClick(e)}
-              >
-                   <Typography sx={{fontSize:'0.7rem'}}
-                      mr={1}
-                      variant="overline">{props.num_comments}
-                  </Typography>
-                  <ForumOutlinedIcon sx={{fontSize:'small'}} />
-              </IconButton>
           </Box>
         </Box>
       </Paper>

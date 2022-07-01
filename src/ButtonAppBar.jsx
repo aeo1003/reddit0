@@ -177,8 +177,7 @@ const handleKeyPress = (event) => {
             <IconButton
               id='menu'
               size="large"
-              edge="start"  
-              color="inherit"      
+              edge="start"    
               aria-label="icono-menu-cambio-sub"
               //sx={{mr: 2}}
               onClick={(e) => handleMenuClick(e)}
@@ -192,8 +191,8 @@ const handleKeyPress = (event) => {
               id="ordena"
               size="large"
               edge="start"
-              color="inherit"
-              aria-label="icono-menu-ordenar"
+              
+             // aria-label="icono-menu-ordenar"
               //aria-controls='Control'
                sx={{ ml: '0rem' }}
               onClick={(e) => handleSortMenuClick(e)}
@@ -251,7 +250,7 @@ const handleKeyPress = (event) => {
                      //label="Dark Theme"
                      
                      />
-                     <Icon>
+                     <Icon >
                       <NightsStayTwoToneIcon />
                      </Icon >
                     </Box>
