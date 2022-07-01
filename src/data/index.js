@@ -83,15 +83,7 @@ export const theme1 = `{
       }
     },
     components: {
-      MuiButton: {
-        defaultProps: {
-          disableRipple: true,
-          size: "large",
-          sx: {
-            borderRadius: "10px"
-          }
-        }
-      },
+     
       MuiCard: {
         styleOverrides: {
             root: {
@@ -104,7 +96,7 @@ export const theme1 = `{
           styleOverrides: {
               root: {
                // background: "#aabbccdd"
-               // color: '#fff'
+               color: '#222'              
               }
             }
           },

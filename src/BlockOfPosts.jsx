@@ -123,6 +123,8 @@ export default function BlockOfPosts(props) {
                                     utc={UTCtoDate(item.data.created_utc)} 
                                     topic={item.data.link_flair_text}
                                     url={item.data.url}
+                                    hint={item.data.post_hint}
+                                    thumb={item.data.thumbnail}
                                 />                    
                         </Box>                     
                         )

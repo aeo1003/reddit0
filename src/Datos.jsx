@@ -127,7 +127,7 @@ const openSite = () => {
                 
           </Box>
 
-              <Typography style={{ fontWeight: 900 }} sx={{fontSize:'1.1rem'}} > {props.topic} </Typography>          
+              <Typography style={{ fontWeight: 900 }} sx={{fontSize:'1.1rem'}} > {props.topic || props.hint} </Typography>          
         </Box>
       </Box>
     
@@ -137,11 +137,12 @@ const openSite = () => {
             <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
                 <Typography mr={1}               
                             fontWeight='500' 
-                            fontSize='0.7rem' 
+                            fontSize='01rem' 
                             variant="body1">{props.subject}
                 </Typography>
             </Box>
-        </Box>  
+            {props.hint === 'image' ? <img width='80' src={props.thumbnail || props.url} /> : null }
+        </Box>
         
         <Box>
           <Divider />
