@@ -40,26 +40,56 @@ export const theme1 = `{
       }
     },
     components: {
-      MuiAppbar: {
-        defaultProps: {
-            size: 'large',
-            background: 'skyblue'
-        }
+     
     
-      },
-      MuiButton: {
+      MuiAppBar: {
+        styleOverrides: {
+            colorInherit: {
+                backgroundColor: "#ddd",
+                //color: "#f00"
+            },
+        },
         defaultProps: {
-          disableRipple: true,
-          size: "large",
-          sx: {
-            borderRadius: "10px"
-          }
-        }
+            color: "inherit",
+        },
       },
+
+      MuiTypography: {
+        styleOverrides: {
+            root: {
+              color: '#002'              
+            }
+          }        
+    },
+
+      MuiCard: {
+        styleOverrides: {
+            colorInherit: {
+                backgroundColor: "#444",
+                border: 'none'
+            },
+        },
+        defaultProps: {
+            color: "inherit",
+        },
+      },
+
+      MuiIconButton: {
+        styleOverrides: {
+            colorInherit: {                
+                color: "#222"
+            },
+        },
+        defaultProps: {
+            color: "inherit",
+        },
+      },
+      
+    
       MuiPaper: {
         styleOverrides: {
           root: {
-            background: "#f00"
+            background: "#eee"
           }
         },
         defaultProps: {
@@ -72,8 +102,119 @@ export const theme1 = `{
 
 
 
+  export const navbarDark = {
+    palette: {
+      primary: {
+        main: "#1769aa"
+      },
+      secondary: {
+        main: "#00b0ff"
+      }
+    },
+    components: {
+     
+    
+      MuiAppBar: {
+        styleOverrides: {
+            colorInherit: {
+                backgroundColor: "#222",
+                //color: "#f00"
+            },
+        },
+        defaultProps: {
+            color: "inherit",
+        },
+      },
+
+      MuiTypography: {
+        styleOverrides: {
+            root: {
+              color: '#eee'              
+            }
+          }        
+    },
+
+      MuiCard: {
+        styleOverrides: {
+            colorInherit: {
+                backgroundColor: "#bbb",
+                border: 'none'
+            },
+        },
+        defaultProps: {
+            color: "inherit",
+        },
+      },
+
+      MuiIconButton: {
+        styleOverrides: {
+            colorInherit: {                
+                color: "#ccc"
+            },
+        },
+        defaultProps: {
+            color: "inherit",
+        },
+      },
+      
+    
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            background: "#222"
+          }
+        },
+        defaultProps: {
+          elevation: 6
+        }
+      }
+    }
+  };
+
+
 
   export const postcards = {
+    palette: {
+      mode: 'light',
+      primary: {
+        main: "#deedaa"
+      },
+      secondary: {
+        main: "#aef0f0"
+      }
+    },
+    components: {
+     
+      MuiCard: {
+        styleOverrides: {
+            root: {
+             // background: "#aabbccdd"
+              background: '#ccc'
+            }
+          }
+      },
+      MuiPaper: {
+        styleOverrides: {
+            root: {
+               background: "#ddd"
+              // background: '#f2a'
+            }
+          }
+      },
+      MuiTypography: {
+        styleOverrides: {
+            root: {
+              // background: "#aabbccdd"
+              color: '#222'              
+            }
+          }
+        }
+    }
+  };
+
+
+
+  export const postcardsDark = {
     palette: {
       primary: {
         main: "#deedaa"
@@ -88,31 +229,44 @@ export const theme1 = `{
         styleOverrides: {
             root: {
              // background: "#aabbccdd"
-              background: '#fff'
+              background: '#888'
             }
           }
-        },
+      },
         MuiTypography: {
           styleOverrides: {
               root: {
                // background: "#aabbccdd"
-               color: '#222'              
+               color: '#fff'              
               }
             }
           },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-           // background: "#aabbccdd"
-            background: '#ddd'
+         
+        MuiPaper: {
+          styleOverrides: {
+            root: {
+            // background: "#aabbccdd"
+              background: '#333'
+            }
+          },
+          
+          defaultProps: {
+            elevation: 6
           }
         },
-        defaultProps: {
-          elevation: 6
+        MuiIcon: {
+          styleOverrides: {
+            root: {
+             background: "#aabbccdd",
+              color: '#ddd'
+            }
+          }
         }
       }
-    }
   };
+
+
+
 
 
 
@@ -134,6 +288,23 @@ export const theme1 = `{
           root: {
            // background: "#aabbccdd"
             background: '#bbb'
+          }
+        },
+        defaultProps: {
+          elevation: 6
+        }
+      }
+    }
+  };
+  export const mainAppDark = {
+
+    components: {
+     
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+           // background: "#aabbccdd"
+            background: '#888'
           }
         },
         defaultProps: {

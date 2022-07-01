@@ -3,9 +3,10 @@ import { useState, useEffect, useRef, createContext, useContext } from 'react'
 import './App.css'
 import useFetch from './useFetch'
 import ButtonAppBar from './ButtonAppBar'
+import baseTheme from './styles/styles'
 import Datos from './Datos'
 import BlockOfPosts from './BlockOfPosts'
-import {mainApp, navbar, postcards} from './data'
+import {mainApp, mainAppDark, navbar, postcards, postcardsDark} from './data'
 // import { SettingsSystemDaydreamTwoTone } from '@mui/iconsmaterial'
 import { myFetch } from './myFetch'
 import axios from "axios"
@@ -28,6 +29,7 @@ import {
 } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { SetMealOutlined } from '@mui/icons-material'
 
 
 // Define theme settings
@@ -43,6 +45,8 @@ const light = {
    },
  };
 
+ // 
+
 
 export const Context = createContext('default value')
 
@@ -50,10 +54,16 @@ function App() {
 
 // The light theme is used by default
 const [isDarkTheme, setIsDarkTheme] = useState(false);
+const [mode, setMode] = useState('light')
+const [theme, setTheme] = useState(postcards)
+const [themeApp, setThemeApp] = useState([])
 
 // This function is triggered when the Switch component is toggled
-const changeTheme = () => {
-  setIsDarkTheme(!isDarkTheme);
+const changeTheme = (e) => {
+  setIsDarkTheme(e);
+  //console.log('primer theme : ',theme)
+  {e ? setTheme(createTheme(postcardsDark)) : setTheme(createTheme(postcards))}
+  {e ? setThemeApp(createTheme(mainAppDark)) : setTheme(createTheme(mainApp))}
 };
 
 
@@ -66,6 +76,7 @@ const changeTheme = () => {
    const {data,error,loading,status} = useFetch(url)
    
    const [datos,setDatos] = useState([])
+   
 
    useEffect(() => {
       setDatos(data)    
@@ -74,6 +85,10 @@ const changeTheme = () => {
    useEffect(() => {
       setTitle(title)
       setDatos([])
+      setTheme(createTheme(postcards))
+    //  setThemeApp(createTheme(mainApp))
+      
+      //console.log('sljfsdkf',theme)
    },[])
 
    
@@ -124,24 +139,25 @@ const changeTheme = () => {
          }
    }
 
-   // 2effee
    
    return (
-      <ThemeProvider theme={createTheme(mainApp)} > 
-     <Paper>
-        
+      
+     
          <Context.Provider value={datos}>           
             
-            <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
+            <ThemeProvider theme={createTheme(navbar)} >
+               <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onMode={ e => setMode(e)} 
+                             onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
+            </ThemeProvider>
+
             <ThemeProvider theme={createTheme(postcards)} >          
-               <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} />
+               <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} m={theme} />
             </ThemeProvider>     
               
          </Context.Provider>
         
-        
-     </Paper>
-     </ThemeProvider>  
+   
+    
   )  
 }
 

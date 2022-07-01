@@ -12,7 +12,7 @@ import NightsStayTwoToneIcon from '@mui/icons-material/NightsStayTwoTone';
 import useScroll from './useScroll'
 import useFetch from './useFetch'
 import { Context } from './App';
-import { navbar, postcards } from './data'
+import { navbar, navbarDark, postcards } from './data'
 
 
 
@@ -41,29 +41,6 @@ import {
 
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 
-// Define theme settings
-const light = {
-  palette: {
-    mode: "light",
-  },
-};
-
-const dark = {
-  palette: {
-    mode: "dark",
-  },
-};
-
-
-
-
-
-
-
-
-
-
-
 
 export default function ButtonAppBar(props) {
 
@@ -73,16 +50,13 @@ const [isDarkTheme, setIsDarkTheme] = useState(false);
 // This function is triggered when the Switch component is toggled
 const changeTheme = () => {
   setIsDarkTheme(!isDarkTheme)
-  props.onChangeTheme(isDarkTheme)
+  props.onChangeTheme(!isDarkTheme)
 };
 
 
 
-
-
-
   const refNewSub = useRef()
-  const subnames = ['Futurology','Technology','Singularity']
+  const subnames = ['Futurology','Roomporn','Graphic_Design','Aww']
 
   const [anchorEl, setAnchorEl] = React.useState(false)
 
@@ -92,15 +66,8 @@ const changeTheme = () => {
   const isSortMenuOpen = Boolean(anchorSortEl)
   const [newsub, setNewsub] = React.useState('')
 
-
-  // const [posts, setPosts] = useState([])
-  // const [temas, setTemas] = useState([])
-  // const [title, setTitle] = useState('')
-  
   const [sortedBy, setSortedBy] = useState(null)
-  // const theme2 = createTheme()
-  // theme2 = responsiveFontSizes(theme2)
-
+  const [theme, setTheme] = useState('navbar')
 
   const breakpoints = {
     values: {
@@ -112,42 +79,6 @@ const changeTheme = () => {
     }
   }
   
-  // const theme = createTheme({
-  //   breakpoints,
-  //   typography: {
-  //     h5: {
-  //       fontSize: "1.3rem",
-  //       [`@media screen and (max-width: ${breakpoints.values.md}px)`]: {
-  //         fontSize: "2rem",
-  //         fontWeight: "600",
-  //         color: "#888"          
-  //       }
-  //     }
-  //   }
-  // })
-
-
-const theme = createTheme({navbar})
-
-
-  // const theme = createTheme({
-  //   components: {
-  //     MuiTypography: {
-  //       variants: [
-  //         {
-  //           props: {
-  //             variant: 'body3'
-  //           },
-  //           style: {
-  //             fontSize: '0.8rem',
-  //             fontWeight: 'lighter',
-  //             color: '#222'
-  //           }
-  //         }
-  //       ]
-  //     }
-  //     }  
-  //   })
 
   
   useEffect(() => {
@@ -163,18 +94,25 @@ const theme = createTheme({navbar})
   }, [sortedBy])
 
 
+  useEffect(() => {      
+    //const newTheme = navbar
+    setTheme(createTheme(navbar))
+
+  },[])
+
+  
+
 
   const { y, x, scrollDirection } = useScroll();  
 
   const styles = {
     active: {
-      color: 'rgba(20,20,20, 0.5)',
     //  backgroundColor: '#6FFCAA',
       visibility: "visible",
       transition: "all 0.5s"
     },
     hidden: {
-      backgroundColor: 'lightgray)',
+      backgroundColor: 'lightgray',
       visibility: "hidden",      
       transition: "all 0.5s",
       transform: "translateY(-100%)"
@@ -229,24 +167,40 @@ const handleKeyPress = (event) => {
 }
 
   return (
-    <ThemeProvider theme={theme}>
-     {/* <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}> */}
+    // <ThemeProvider theme={theme}>
+  <ThemeProvider theme={isDarkTheme ? createTheme(navbarDark) : createTheme(navbar)}> 
 
    <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active } position="sticky" >
-    <Toolbar className='toolbar' sx={{ background:'darkgray', justifyContent: "space-between", paddingRight:'0px', paddingLeft:'12px' }}>
+    
+    <Toolbar className='toolbar' sx={{ justifyContent: "space-between"}}>
         <Box display='flex' alignItems='center'>
             <IconButton
               id='menu'
               size="large"
-              edge="start"        
+              edge="start"  
+              color="inherit"      
               aria-label="icono-menu-cambio-sub"
-            // sx={{ mr: 2}}
+              //sx={{mr: 2}}
               onClick={(e) => handleMenuClick(e)}
             >
-              <MenuIcon sx={{mr: 2}}/>
+              <MenuIcon />
             </IconButton>
 
-            <Typography sx={{color:'#222'}} variant='h5'> {props.title}</Typography>
+            <Typography variant='h5'> {props.title}</Typography>
+
+            <IconButton
+              id="ordena"
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="icono-menu-ordenar"
+              //aria-controls='Control'
+               sx={{ ml: '0rem' }}
+              onClick={(e) => handleSortMenuClick(e)}
+            >
+              <FilterListOutlinedIcon />
+            </IconButton>
+
 
             <Menu
               id="menu-camio-sub"
@@ -281,31 +235,18 @@ const handleKeyPress = (event) => {
 
             </Menu>
         
-
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="icono-menu-ordenar"
-              //aria-controls='Control'
-              sx={{ ml: 2 }}
-              onClick={(e) => handleSortMenuClick(e)}
-            >
-              <FilterListOutlinedIcon />
-            </IconButton>
-
-            </Box>
+        </Box>
 
 
          
-            {/* <Card sx={{ bgcolor: 'inherit', y:''}}> */}
+            {/* <Card >
                <CardHeader
                action={
-                  <FormGroup >
-                    <Box display='flex' direction='row' alignItems='center' >
+                  <FormGroup > */}
+                    <Box display='flex' direction='row' alignItems='center' > 
                      <FormControlLabel
                      control={
-                        <Switch checked={isDarkTheme} onChange={changeTheme} />
+                        <Switch checked={isDarkTheme}  onChange={changeTheme}/>
                      }
                      //label="Dark Theme"
                      
@@ -314,16 +255,10 @@ const handleKeyPress = (event) => {
                       <NightsStayTwoToneIcon />
                      </Icon >
                     </Box>
-                  </FormGroup>
+                 {/*  </FormGroup>
                }
                />
-            {/* </Card> */}
-
-
-
-
-
-
+            </Card> */}
 
       <Menu
         anchorEl={anchorSortEl}
@@ -332,6 +267,38 @@ const handleKeyPress = (event) => {
         sx={{textAlign:'center'}}       
   
       >
+
+        <Box display='flex' sx={{ flexDirection: 'column' }} >
+          <Box sx={{flexDirection: 'row'}} >
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Dasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+            <Typography variant='overline'> By-Date</Typography>
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Ddes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+          </Box>
+          <Box >
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+            <Typography variant='overline'> By Votes</Typography>
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+          </Box>
+          <Box >
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Casc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+            <Typography variant='overline'> By Comments</Typography>
+            <IconButton onClick={(e) => {handleClickSortedBy(e,'Cdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+          </Box>
+        </Box>
+      
+      
+      
+      </Menu>
+
+    </Toolbar>
+  </AppBar>
+  </ThemeProvider>
+)
+}
+
+
+
+
         {/* <Box sx={{color: '#888'}} > */}
 
 
@@ -373,30 +340,3 @@ const handleKeyPress = (event) => {
           }
         }}
       > */}
-        <Box display='flex' sx={{ flexDirection: 'column' }} >
-          <Box sx={{flexDirection: 'row'}} >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Dasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By-Date</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Ddes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
-          </Box>
-          <Box >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By Votes</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
-          </Box>
-          <Box >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Casc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By Comments</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Cdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
-          </Box>
-        </Box>
-      
-      
-      
-      </Menu>
-
-    </Toolbar>
-  </AppBar>
-  </ThemeProvider>
-)
-}
