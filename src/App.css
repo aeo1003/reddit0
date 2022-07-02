@@ -6,6 +6,10 @@
      /* background-color: rgb(23, 76, 23); */
 }
 
-.toolbar {
-    /* background-color: rgb(43, 61, 55); */
+.lightFondo {
+    background-color: rgb(129, 119, 119);
+}
+
+.darkFondo {
+    background-color: rgb(30, 32, 30);
 }

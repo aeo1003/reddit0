@@ -47,6 +47,8 @@ const light = {
 
  // 
 
+ 
+
 
 export const Context = createContext('default value')
 
@@ -60,10 +62,12 @@ const [themeApp, setThemeApp] = useState([])
 
 // This function is triggered when the Switch component is toggled
 const changeTheme = (e) => {
+  // console.log('aqui e vale : ',e)
   setIsDarkTheme(e);
   //console.log('primer theme : ',theme)
   {e ? setTheme(createTheme(postcardsDark)) : setTheme(createTheme(postcards))}
-  {e ? setThemeApp(createTheme(mainAppDark)) : setTheme(createTheme(mainApp))}
+  {e ? setFondo('darkFondo') : setFondo('lightFondo')}
+  console.log('el fondo es  :',fondo)
 };
 
 
@@ -76,16 +80,17 @@ const changeTheme = (e) => {
    const {data,error,loading,status} = useFetch(url)
    
    const [datos,setDatos] = useState([])
+   const [fondo, setFondo] = useState({})
    
-
    useEffect(() => {
       setDatos(data)    
    },[url,data])
-  
+
    useEffect(() => {
       setTitle(title)
       setDatos([])
       setTheme(createTheme(postcards))
+      setFondo('lightFondo')
     //  setThemeApp(createTheme(mainApp))
       
       //console.log('sljfsdkf',theme)
@@ -143,18 +148,30 @@ const changeTheme = (e) => {
    return (
       
      
-         <Context.Provider value={datos}>           
-            
-            <ThemeProvider theme={createTheme(navbar)} >
-               <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onMode={ e => setMode(e)} 
-                             onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
-            </ThemeProvider>
+      <Context.Provider value={datos}>           
+         {/* <ThemeProvider theme={createTheme(postcards)} >           */}
+               {/* <Box sx={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'red'}}></Box> */}
+            {/* </ThemeProvider>   */}
 
-            <ThemeProvider theme={createTheme(postcards)} >          
-               <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} m={theme} />
-            </ThemeProvider>     
-              
-         </Context.Provider>
+
+         {/* <ThemeProvider theme={fondo} >  */}
+            <div className={fondo}>
+            
+               <ThemeProvider theme={createTheme(navbar)} >           
+                  <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onMode={ e => setMode(e)} 
+                              onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
+               </ThemeProvider>
+
+               <ThemeProvider theme={createTheme(postcards)} >          
+                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} m={theme} />
+               </ThemeProvider>  
+            </div>
+         {/* </ThemeProvider>  */}
+
+
+
+
+      </Context.Provider>
         
    
     

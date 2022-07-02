@@ -117,7 +117,7 @@ export const theme1 = `{
       MuiAppBar: {
         styleOverrides: {
             colorInherit: {
-                backgroundColor: "#222",
+                backgroundColor: "#4a4a4a",
                 //color: "#f00"
             },
         },
@@ -141,7 +141,7 @@ export const theme1 = `{
       MuiCard: {
         styleOverrides: {
             colorInherit: {
-                backgroundColor: "#bbb",
+                backgroundColor: "#4a4a4a",
                 border: 'none'
             },
         },
@@ -206,14 +206,14 @@ export const theme1 = `{
         styleOverrides: {
             root: {
              // background: "#aabbccdd"
-              background: '#ccc'
+              background: '#bbb'
             }
           }
       },
       MuiPaper: {
         styleOverrides: {
             root: {
-               background: "#ddd"
+               background: "#eee"
               // background: '#f2a'
             }
           }
@@ -320,10 +320,10 @@ export const theme1 = `{
   export const mainApp = {
     palette: {
       primary: {
-        main: "#deedaa"
+        main: "#1769aa"
       },
       secondary: {
-        main: "#aef0f0"
+        main: "#00b0ff"
       }
     },
     components: {
@@ -332,28 +332,32 @@ export const theme1 = `{
         styleOverrides: {
           root: {
            // background: "#aabbccdd"
-            background: '#bbb'
+            background: '#ccc'
           }
-        },
-        defaultProps: {
-          elevation: 6
         }
       }
     }
   };
-  export const mainAppDark = {
 
+
+
+  export const mainAppDark = {
+    palette: {
+      primary: {
+        main: "#1769aa"
+      },
+      secondary: {
+        main: "#00b0ff"
+      }
+    },
     components: {
      
       MuiPaper: {
         styleOverrides: {
           root: {
            // background: "#aabbccdd"
-            background: '#888'
+            background: '#333'
           }
-        },
-        defaultProps: {
-          elevation: 6
         }
       }
     }

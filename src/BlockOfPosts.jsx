@@ -76,13 +76,13 @@ export default function BlockOfPosts(props) {
         return d.toLocaleDateString();
     }
     
-   // console.log('----> st : ',st)
+    console.log('----> st : ',props.m)
 
-    if(lo){ return <div style={{padding:'2rem'}} ><h3>loading...</h3></div> } 
+    if(lo){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>loading...</h3></div> } 
 
    
-    if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3>No lo encuentro.</h3></div> }
-    if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3>Zona Privada, prohibido el paso.</h3></div> }
+    if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>No lo encuentro.</h3></div> }
+    if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>Zona Privada, prohibido el paso.</h3></div> }
     
     if (da?.data?.children.length>0) {
       //  if (st==='200') {

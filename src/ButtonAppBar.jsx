@@ -185,7 +185,7 @@ const handleKeyPress = (event) => {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant='h5'> {props.title}</Typography>
+            <Typography variant='h5' marginLeft={4} marginRight={4}> {props.title}</Typography>
 
             <IconButton
               id="ordena"
