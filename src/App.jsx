@@ -157,14 +157,14 @@ const changeTheme = (e) => {
          {/* <ThemeProvider theme={fondo} >  */}
             <div className={fondo}>
             
-               {/* <ThemeProvider theme={createTheme(navbar)} >           
+               <ThemeProvider theme={createTheme(navbar)} >           
                   <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onMode={ e => setMode(e)} 
                               onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
                </ThemeProvider>
 
                <ThemeProvider theme={createTheme(postcards)} >          
                   <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} m={theme} />
-               </ThemeProvider>   */}
+               </ThemeProvider>  
             </div>
          {/* </ThemeProvider>  */}
 
