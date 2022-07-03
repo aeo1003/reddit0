@@ -8,6 +8,8 @@ import { navbar, postcards } from './data'
 
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+
+
 import { Context } from './App';
 import useFetch from './useFetch'
 
@@ -51,14 +53,13 @@ const openSite = () => {
       <Box p={0.8} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', 
             justifyContent:'space-between' }}> 
             
-        <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', 
-            justifyContent:'space-between' }}>
-              <Icon>
-                <ThumbUpAltOutlinedIcon sx={{fontSize:'medium'}} />
-              </Icon>
-                <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant=""> {props.ups} </Typography>
-              
-        </Box>
+            <Box sx={{display: 'flex',flexDirection: 'row', alignItems: 'center', 
+                }}>
+                  <Icon>
+                    <ThumbUpAltOutlinedIcon sx={{fontSize:'1.2rem'}} />
+                  </Icon>
+                    <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant=""> {props.ups} </Typography>                  
+            </Box>
 
             <Typography style={{ fontWeight: 900 }} sx={{fontSize:'1.1rem'}} > {props.topic || props.hint} </Typography>          
       </Box>
