@@ -251,8 +251,6 @@ const handleKeyPress = (event) => {
         
         </Box>
 
-
-         
             
                     <Box display='flex' direction='row' alignItems='center' > 
                     
