@@ -8,6 +8,8 @@ import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import NightsStayTwoToneIcon from '@mui/icons-material/NightsStayTwoTone';
+import StarIcon from '@mui/icons-material/Star';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 import useScroll from './useScroll'
 import useFetch from './useFetch'
@@ -185,8 +187,21 @@ const handleKeyPress = (event) => {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant='h5' marginLeft={4} marginRight={4}> {props.title}</Typography>
-
+            <Typography variant='h5'> {props.title}</Typography>
+            
+            <IconButton
+              id=" star"
+              size="large"
+              edge="start"
+              
+             // aria-label="icono-menu-ordenar"
+              //aria-controls='Control'
+                sx={{ ml: '0.2rem' }}
+              onClick={(e) => handleSortMenuClick(e)}
+            >
+              <StarIcon sx={{color:'tomato', fontSize:'1.5rem'}} />
+            </IconButton>
+            
             <IconButton
               id="ordena"
               size="large"
@@ -194,7 +209,7 @@ const handleKeyPress = (event) => {
               
              // aria-label="icono-menu-ordenar"
               //aria-controls='Control'
-               sx={{ ml: '0rem' }}
+                // sx={{ ml: '1rem' }}
               onClick={(e) => handleSortMenuClick(e)}
             >
               <FilterListOutlinedIcon />
@@ -238,26 +253,14 @@ const handleKeyPress = (event) => {
 
 
          
-            {/* <Card >
-               <CardHeader
-               action={
-                  <FormGroup > */}
+            
                     <Box display='flex' direction='row' alignItems='center' > 
-                     <FormControlLabel
-                     control={
-                        <Switch checked={isDarkTheme}  onChange={changeTheme}/>
-                     }
-                     //label="Dark Theme"
-                     
-                     />
-                     <Icon >
-                      <NightsStayTwoToneIcon />
-                     </Icon >
+                    
+                     <IconButton checked={isDarkTheme}  onClick={changeTheme}>
+                      { !isDarkTheme ? <NightsStayTwoToneIcon /> : <WbSunnyIcon /> }
+                     </IconButton >
                     </Box>
-                 {/*  </FormGroup>
-               }
-               />
-            </Card> */}
+            
 
       <Menu
         anchorEl={anchorSortEl}
