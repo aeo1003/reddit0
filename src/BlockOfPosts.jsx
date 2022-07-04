@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 //import * as API from "../services/GetInfo"
-import {Box,Grid} from '@mui/material'
-import {Masonry} from '@mui/lab'
+import {Box,Grid} from '@mui/material/'
+import Masonry from '@mui/lab/Masonry'
 import Datos from './Datos'
 import {navbar,postcards,postcardsDark} from './data'
-import { makeStyles } from "@mui/styles"
+//import { makeStyles } from "@mui/styles"
 import { Context } from './App'
-import baseTheme from "./styles/styles";
+//import baseTheme from "./styles/styles";
 
 
 import "@fontsource/roboto"; // Loading Roboto font. MUI was designed with this font in mind.
-import { createTheme, ThemeProvider } from "@mui/material/styles"
-
+ import { createTheme, ThemeProvider } from "@mui/material/styles"
+ import { StyledEngineProvider } from '@mui/material/styles';
 // // Define theme settings
 // const light = {
 //     palette: {
@@ -34,7 +34,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 export default function BlockOfPosts(props) {
 
-    const [theme, setTheme] = useState(props.m ? postcards : postcardsDark)
+   // const [theme, setTheme] = useState(props.m ? postcards : postcardsDark)
 
 
 
@@ -42,15 +42,15 @@ export default function BlockOfPosts(props) {
    const [childData, setChildData] = useState(false)
 
 
-                                                    const useStyles = makeStyles(() => ({
-                                                        container: {
-                                                            padding: '10px 10px 10px 10px',
-                                                        },
-                                                        item: {
-                                                            padding: '10px',
+                                                    // const useStyles = makeStyles(() => ({
+                                                    //     container: {
+                                                    //         padding: '10px 10px 10px 10px',
+                                                    //     },
+                                                    //     item: {
+                                                    //         padding: '10px',
                                                                 
-                                                        },
-                                                        }));
+                                                    //     },
+                                                    //     }));
 
 
    // function bgcolor(v) { return API.prueba(temas,v) }
@@ -67,7 +67,7 @@ export default function BlockOfPosts(props) {
    
    useEffect(() => {
      //console.log('el theme pasado es : ',props.m)
-     setTheme(props.m)
+     //setTheme(props.m)
    },[])
 
 
@@ -76,7 +76,7 @@ export default function BlockOfPosts(props) {
         return d.toLocaleDateString();
     }
     
-    console.log('----> st : ',props.m)
+//    console.log('----> st : ',props.m)
 
     if(lo){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>loading...</h3></div> } 
 
@@ -84,13 +84,13 @@ export default function BlockOfPosts(props) {
     if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>No lo encuentro.</h3></div> }
     if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>Zona Privada, prohibido el paso.</h3></div> }
     
-    if (da?.data?.children.length>0) {
-      //  if (st==='200') {
+    if (da?.data?.children.length>0) {      
         return (    
         <>
-         <ThemeProvider theme={props.m}>
+        {/* <StyledEngineProvider injectFirst> */}
+         {/* <ThemeProvider theme={props.m}> */}
             <Box ml={2} mt={4}>
-                <Masonry columns={{ xs: 1, sm: 2, md:3, lg:4 }} spacing={2}>                
+                <Masonry columns={{ xs: 1, sm: 2, md:3, lg:4 }} spacing={2}>                 
                 {                          
                       da.data.children.map(item =>
                         <Box key={item.data.created}  xs={4} sm={4} md={2}>                            
@@ -107,15 +107,18 @@ export default function BlockOfPosts(props) {
                                     url={item.data.url}
                                     hint={item.data.post_hint}
                                     thumb={item.data.thumbnail}
-                                    theme={props.m}
+                                   // theme={props.m}
 
                                 />                    
                         </Box>                     
                         )
                   }                      
                 </Masonry>
+                {/* </Masonry> */}
+                
             </Box>
-        </ThemeProvider>    
+        {/* </ThemeProvider>     */}
+        {/* </StyledEngineProvider> */}
     </>
         )}
 }

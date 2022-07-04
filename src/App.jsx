@@ -10,7 +10,8 @@ import {mainApp, mainAppDark, navbar, postcards, postcardsDark} from './data'
 // import { SettingsSystemDaydreamTwoTone } from '@mui/iconsmaterial'
 import { myFetch } from './myFetch'
 import axios from "axios"
-
+import {Masonry} from '@mui/lab/'
+import {lightTheme, darkTheme, GlobalStyles} from './theme.js'
 
 
 import "@fontsource/roboto"; // Loading Roboto font. MUI was designed with this font in mind.
@@ -32,51 +33,33 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { SetMealOutlined } from '@mui/icons-material'
 
 
-// Define theme settings
-const light = {
-   palette: {
-     mode: "light",
-   },
- };
- 
- const dark = {
-   palette: {
-     mode: "dark",
-   },
- };
-
- // 
-
- 
-
-
 export const Context = createContext('default value')
 
 function App() {
 
 // The light theme is used by default
-const [isDarkTheme, setIsDarkTheme] = useState(false);
-const [mode, setMode] = useState('light')
-const [theme, setTheme] = useState(postcards)
+//const [isDarkTheme, setIsDarkTheme] = useState(false);
+//const [mode, setMode] = useState('light')
+const [theme, setTheme] = useState('light')
 const [themeApp, setThemeApp] = useState([])
 
+
+
+
 // This function is triggered when the Switch component is toggled
-const changeTheme = (e) => {
-  // console.log('aqui e vale : ',e)
-  setIsDarkTheme(e);
-  //console.log('primer theme : ',theme)
-  {e ? setTheme(createTheme(postcardsDark)) : setTheme(createTheme(postcards))}
-  {e ? setFondo('darkFondo') : setFondo('lightFondo')}
-  console.log('el fondo es  :',fondo)
+const changeTheme = () => {
+  //console.log('theme : ',theme)
+  theme==='light' ? setTheme('dark') : setTheme('light')
+  
 };
 
 
 
 
 
-   const [title, setTitle] = useState('Technology')
+   const [title, setTitle] = useState('PICS')
    
-   const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=30'
+   const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=60'
    const {data,error,loading,status} = useFetch(url)
    
    const [datos,setDatos] = useState([])
@@ -89,8 +72,8 @@ const changeTheme = (e) => {
    useEffect(() => {
       setTitle(title)
       setDatos([])
-      setTheme(createTheme(postcards))
-      setFondo('lightFondo')
+                                                      //  setTheme(createTheme(postcards))
+      // setFondo('lightFondo')
     //  setThemeApp(createTheme(mainApp))
       
       //console.log('sljfsdkf',theme)
@@ -149,32 +132,19 @@ const changeTheme = (e) => {
       
      
       <Context.Provider value={datos}>           
-         {/* <ThemeProvider theme={createTheme(postcards)} >           */}
-               {/* <Box sx={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'red'}}></Box> */}
-            {/* </ThemeProvider>   */}
-
-
-         {/* <ThemeProvider theme={fondo} >  */}
-            <div className={fondo}>
+{/* <div style={{backgroundColor:'#233'}}> */}
+         <ThemeProvider theme={theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme)} > 
             
-               <ThemeProvider theme={createTheme(navbar)} >           
-                  <ButtonAppBar title={title} onChangeSort={ (e) => {sortBy(e)} } onMode={ e => setMode(e)} 
-                              onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/>
-               </ThemeProvider>
+            {/* <GlobalStyles /> */}               
+                  <ButtonAppBar t={theme} title={title} onChangeSort={ (e) => {sortBy(e)} }
+                              onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/> 
 
-               <ThemeProvider theme={createTheme(postcards)} >          
-                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status} m={theme} />
-               </ThemeProvider>  
-            </div>
-         {/* </ThemeProvider>  */}
-
-
-
-
+                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  />
+        
+         </ThemeProvider> 
+         {/* </div> */}
       </Context.Provider>
         
-   
-    
   )  
 }
 

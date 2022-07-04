@@ -15,7 +15,7 @@ import useScroll from './useScroll'
 import useFetch from './useFetch'
 import { Context } from './App';
 import { navbar, navbarDark, postcards } from './data'
-
+import {lightTheme, darkTheme, GlobalStyles} from './theme.js'
 
 
 
@@ -41,7 +41,7 @@ import {
   CssBaseline,
 } from "@mui/material";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles"
+ import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 
 export default function ButtonAppBar(props) {
@@ -58,7 +58,7 @@ const changeTheme = () => {
 
 
   const refNewSub = useRef()
-  const subnames = ['Futurology','Roomporn','Graphic_Design','Aww']
+  const subnames = ['Futurology','Roomporn','Graphic_Design','Pics']
 
   const [anchorEl, setAnchorEl] = React.useState(false)
 
@@ -69,7 +69,7 @@ const changeTheme = () => {
   const [newsub, setNewsub] = React.useState('')
 
   const [sortedBy, setSortedBy] = useState(null)
-  const [theme, setTheme] = useState('navbar')
+ // const [theme, setTheme] = useState('navbar')
 
   const breakpoints = {
     values: {
@@ -91,14 +91,13 @@ const changeTheme = () => {
 
   useEffect(() => {
     setAnchorSortEl(null)
-    //stopImmediatePropagation
     props.onChangeSort(sortedBy)
   }, [sortedBy])
 
 
   useEffect(() => {      
     //const newTheme = navbar
-    setTheme(createTheme(navbar))
+    //setTheme(createTheme(navbar))
 
   },[])
 
@@ -109,7 +108,8 @@ const changeTheme = () => {
 
   const styles = {
     active: {
-    //  backgroundColor: '#6FFCAA',
+     // backgroundColor: '#6FFCAA',
+     
       visibility: "visible",
       transition: "all 0.5s"
     },
@@ -164,135 +164,139 @@ const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
     setAnchorEl(null)
-    setNewsub(refNewSub.current.value)
+    setNewsub(refNewSub.current.value) // el ref se refiere al campo input
   }
 }
 
   return (
-    // <ThemeProvider theme={theme}>
-  <ThemeProvider theme={isDarkTheme ? createTheme(navbarDark) : createTheme(navbar)}> 
-
-   <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active } position="sticky" >
-    
-    <Toolbar className='toolbar' sx={{ justifyContent: "space-between"}}>
-        <Box display='flex' alignItems='center'>
-            <IconButton
-              id='menu'
-              size="large"
-              edge="start"    
-              aria-label="icono-menu-cambio-sub"
-              //sx={{mr: 2}}
-              onClick={(e) => handleMenuClick(e)}
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Typography variant='h5'> {props.title}</Typography>
-            
-            <IconButton
-              id=" star"
-              size="large"
-              edge="start"
-              
-             // aria-label="icono-menu-ordenar"
-              //aria-controls='Control'
-                sx={{ ml: '0.2rem' }}
-              onClick={(e) => handleSortMenuClick(e)}
-            >
-              <StarIcon sx={{color:'tomato', fontSize:'1.5rem'}} />
-            </IconButton>
-            
-            <IconButton
-              id="ordena"
-              size="large"
-              edge="start"
-              
-             // aria-label="icono-menu-ordenar"
-              //aria-controls='Control'
-                // sx={{ ml: '1rem' }}
-              onClick={(e) => handleSortMenuClick(e)}
-            >
-              <FilterListOutlinedIcon />
-            </IconButton>
-
-
-            <Menu
-              id="menu-camio-sub"
-              anchorEl={anchorEl}
-              open={isMenuOpen}
-              onClose={onMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-
-              {(subnames.length > 0)
-              ? subnames.map((sub, index) => (
-                <MenuItem sx={{color: '#222'}} key={index} onClick={(e) => handleMenuClose(e)}>
-                    <Typography variant='overline'> {sub}</Typography>
-                </MenuItem>
-              ))
-              : null        
-              }
-
-              <Box display='flex' direction='row' alignItems='center'>
-                <Box display='flex' direction='row' alignItems='center'>
-                    <Icon sx={{cursor:'none'}} >
-                      <KeyboardArrowRightRoundedIcon />
-                    </Icon>            
-                </Box>
-              
-                    <input style={{maxWidth:'80%'}} ref={refNewSub} id='textinput' type="text" name="fname" 
-                            onKeyUp={handleKeyPress} onKeyDown={e=> e.stopPropagation()}/>
-              </Box>
-
-            </Menu>
-        
-        </Box>
-
-            
-                    <Box display='flex' direction='row' alignItems='center' > 
-                    
-                     <IconButton checked={isDarkTheme}  onClick={changeTheme}>
-                      { !isDarkTheme ? <NightsStayTwoToneIcon /> : <WbSunnyIcon /> }
-                     </IconButton >
-                    </Box>
-            
-
-      <Menu
-        anchorEl={anchorSortEl}
-        open={isSortMenuOpen}
-        onClose={onSortMenuClose}
-        sx={{textAlign:'center'}}       
+    <>
+         {/* <ThemeProvider theme={props.t === 'light' ? createTheme(lightTheme) : createTheme(darkTheme)} >  */}
+   {/* <ThemeProvider theme={isDarkTheme ? createTheme(navbarDark) : createTheme(navbar)}>  */}
+<GlobalStyles />
+   
+     <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active } position="sticky" >
+      
+      <Toolbar sx={{ justifyContent: "space-between"}}>
+          <Box display='flex' alignItems='center'>
+              <IconButton
+                id='menu'
+                size="large"
+                edge="start"    
+                aria-label="icono-menu-cambio-sub"
+                //sx={{mr: 2}}
+                onClick={(e) => handleMenuClick(e)}
+              >
+                <MenuIcon />
+              </IconButton>
   
-      >
-
-        <Box display='flex' sx={{ flexDirection: 'column' }} >
-          <Box sx={{flexDirection: 'row'}} >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Dasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By-Date</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Ddes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+              <Typography variant='overline' sx={{ fontSize:'1.5rem' }}> {props.title}</Typography>
+              
+              <IconButton
+                id=" star"
+                size="large"
+                edge="start"
+                
+               // aria-label="icono-menu-ordenar"
+                //aria-controls='Control'
+                  sx={{ ml: '0.2rem' }}
+              //  onClick={(e) => handleSortMenuClick(e)}
+              >
+                <StarIcon sx={{color:'orange', fontSize:'1.5rem'}} />
+              </IconButton>
+              
+              <IconButton
+                id="ordena"
+                size="large"
+                edge="start"
+                
+               // aria-label="icono-menu-ordenar"
+                //aria-controls='Control'
+                  // sx={{ ml: '1rem' }}
+                onClick={(e) => handleSortMenuClick(e)}
+              >
+                <FilterListOutlinedIcon />
+              </IconButton>
+  
+  
+              <Menu
+                id="menu-camio-sub"
+                anchorEl={anchorEl}
+                open={isMenuOpen}
+                onClose={onMenuClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+  
+                {(subnames.length > 0)
+                ? subnames.map((sub, index) => (
+                  <MenuItem sx={{color: '#222'}} key={index} onClick={(e) => handleMenuClose(e)}>
+                      <Typography variant='overline'> {sub}</Typography>
+                  </MenuItem>
+                ))
+                : null        
+                }
+  
+                <Box display='flex' direction='row' alignItems='center'>
+                  <Box display='flex' direction='row' alignItems='center'>
+                      <Icon sx={{cursor:'none'}} >
+                        <KeyboardArrowRightRoundedIcon />
+                      </Icon>            
+                  </Box>
+                
+                      <input style={{maxWidth:'80%'}} ref={refNewSub} id='textinput' type="text" name="fname" 
+                              onKeyUp={handleKeyPress} onKeyDown={e=> e.stopPropagation()}/>
+                </Box>
+  
+              </Menu>
+          
           </Box>
-          <Box >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By Votes</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Vdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+  
+              
+                      <Box display='flex' direction='row' alignItems='center' > 
+                      
+                       <IconButton checked={isDarkTheme}  onClick={changeTheme}>
+                        { !isDarkTheme ? <NightsStayTwoToneIcon /> : <WbSunnyIcon /> }
+                       </IconButton >
+                      </Box>
+              
+  
+        <Menu
+          anchorEl={anchorSortEl}
+          open={isSortMenuOpen}
+          onClose={onSortMenuClose}
+          sx={{textAlign:'center'}}       
+    
+        >
+  
+          <Box display='flex' sx={{ flexDirection: 'column' }} >
+            <Box sx={{flexDirection: 'row'}} >
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Dasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+              <Typography variant='overline'> By-Date</Typography>
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Ddes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+            </Box>
+            <Box >
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Vasc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+              <Typography variant='overline'> By Votes</Typography>
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Vdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+            </Box>
+            <Box >
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Casc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
+              <Typography variant='overline'> By Comments</Typography>
+              <IconButton onClick={(e) => {handleClickSortedBy(e,'Cdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
+            </Box>
           </Box>
-          <Box >
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Casc')}}>  <ExpandLessOutlinedIcon /> </IconButton>
-            <Typography variant='overline'> By Comments</Typography>
-            <IconButton onClick={(e) => {handleClickSortedBy(e,'Cdes')}}>  <ExpandMoreOutlinedIcon /> </IconButton>
-          </Box>
-        </Box>
+        
+        </Menu>
+  
+      </Toolbar>
+  
       
-      
-      
-      </Menu>
-
-    </Toolbar>
-  </AppBar>
-  </ThemeProvider>
+    </AppBar>
+    {/* </ThemeProvider> */}
+   </>
+  
 )
 }
 
