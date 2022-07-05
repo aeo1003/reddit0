@@ -35,7 +35,7 @@ import { SetMealOutlined } from '@mui/icons-material'
 
 export const Context = createContext('default value')
 
-function App() {
+function App(props) {
 
 // The light theme is used by default
 //const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -49,15 +49,12 @@ const [themeApp, setThemeApp] = useState([])
 // This function is triggered when the Switch component is toggled
 const changeTheme = () => {
   //console.log('theme : ',theme)
+ // theme==='light' ? props.fondo : null
   theme==='light' ? setTheme('dark') : setTheme('light')
-  
+ // theme==='light' ? props.onChangeTheme(createTheme(lightTheme)) : props.onChangeTheme(createTheme(darkTheme))
 };
 
-
-
-
-
-   const [title, setTitle] = useState('PICS')
+   const [title, setTitle] = useState('NEWS')
    
    const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=60'
    const {data,error,loading,status} = useFetch(url)
@@ -132,17 +129,17 @@ const changeTheme = () => {
       
      
       <Context.Provider value={datos}>           
-{/* <div style={{backgroundColor:'#233'}}> */}
+<div style={{backgroundColor:'#233'}}>
          <ThemeProvider theme={theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme)} > 
             
             {/* <GlobalStyles /> */}               
-                  <ButtonAppBar t={theme} title={title} onChangeSort={ (e) => {sortBy(e)} }
+                  <ButtonAppBar t={theme} s={status} title={title} onChangeSort={ (e) => {sortBy(e)} }
                               onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/> 
 
                   <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  />
         
          </ThemeProvider> 
-         {/* </div> */}
+         </div>
       </Context.Provider>
         
   )  
