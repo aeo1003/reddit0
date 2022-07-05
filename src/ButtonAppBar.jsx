@@ -10,6 +10,7 @@ import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRigh
 import NightsStayTwoToneIcon from '@mui/icons-material/NightsStayTwoTone';
 import StarIcon from '@mui/icons-material/Star';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 import useScroll from './useScroll'
 import useFetch from './useFetch'
@@ -42,6 +43,7 @@ import {
 } from "@mui/material";
 
  import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { NearMeTwoTone } from '@mui/icons-material';
 
 
 export default function ButtonAppBar(props) {
@@ -58,7 +60,7 @@ const changeTheme = () => {
 
 
   const refNewSub = useRef()
-  const subnames = ['Futurology','Roomporn','Graphic_Design','Pics']
+  const [subnames, setSubnames] = useState(['FUTUROLOGY','ROOMPORN','NEWS','PICS'])
 
   const [anchorEl, setAnchorEl] = React.useState(false)
 
@@ -164,7 +166,21 @@ const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
     setAnchorEl(null)
-    setNewsub(refNewSub.current.value) // el ref se refiere al campo input
+    setNewsub(refNewSub.current.value) // el ref se refiere al campo input    
+  }
+}
+
+const handleStarClick = (e,t) => {
+  //console.log(t)
+  stopImmediatePropagation(e)
+
+  if(e.currentTarget.childNodes[0].id === 'starfilled'){
+      setSubnames(subs => subs.filter(e=>e!==t))   
+  }
+  if(e.currentTarget.childNodes[0].id === 'borderstar'){
+      const names = [...subnames]
+      names.push(t.toUpperCase())
+      setSubnames(names)
   }
 }
 
@@ -192,16 +208,22 @@ const handleKeyPress = (event) => {
               <Typography variant='overline' sx={{ fontSize:'1.5rem' }}> {props.title}</Typography>
               
               <IconButton
-                id=" star"
+                id="star"
                 size="large"
                 edge="start"
-                
+                onClick={(e) => handleStarClick(e,props.title)} 
                // aria-label="icono-menu-ordenar"
                 //aria-controls='Control'
                   sx={{ ml: '0.2rem' }}
-              //  onClick={(e) => handleSortMenuClick(e)}
+                
               >
-                <StarIcon sx={{color:'orange', fontSize:'1.5rem'}} />
+              {
+                //props.s es el resultado del fetch. 200 es que ha encontrado una pagina que mostrar
+                subnames.includes(props.title.toUpperCase()) && props.s === 200
+                ? <StarIcon sx={{color:'orange', fontSize:'1.5rem'}} id='starfilled'/>
+                : <StarBorderIcon  sx={{color:'orange', fontSize:'1.5rem'}} id='borderstar'/>
+              }
+                
               </IconButton>
               
               <IconButton
