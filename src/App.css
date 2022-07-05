@@ -6,10 +6,10 @@
      /* background-color: rgb(23, 76, 23); */
 }
 
-.lightFondo {
-    background-color: rgb(129, 119, 119);
+.light {
+    background-color: #aff;
 }
 
-.darkFondo {
+.dark {
     background-color: rgb(30, 32, 30);
 }

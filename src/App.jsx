@@ -128,8 +128,8 @@ const changeTheme = () => {
    return (
       
      
-      <Context.Provider value={datos}>           
-<div style={{backgroundColor:'#233'}}>
+              
+      <div className={theme}>
          <ThemeProvider theme={theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme)} > 
             
             {/* <GlobalStyles /> */}               
@@ -139,8 +139,8 @@ const changeTheme = () => {
                   <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  />
         
          </ThemeProvider> 
-         </div>
-      </Context.Provider>
+      </div>
+      
         
   )  
 }

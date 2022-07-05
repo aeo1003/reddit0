@@ -30,16 +30,9 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Card,
-  CardHeader,
-  Switch,
-  CardContent,
   Box,
-  Container,
   Typography,
-  FormGroup,
-  FormControlLabel,
-  CssBaseline,
+
 } from "@mui/material";
 
  import { createTheme, ThemeProvider } from "@mui/material/styles"
@@ -147,6 +140,7 @@ const handleClickSortedBy = (e,t) => {
    }
    
    const handleMenuClick = (e) => {
+
       setAnchorEl(e.currentTarget)    
     }
 
@@ -165,8 +159,10 @@ const handleClickSortedBy = (e,t) => {
 const handleKeyPress = (event) => {
 
   if(event.key === 'Enter'){
+    // stopImmediatePropagation(event)  
     setAnchorEl(null)
-    setNewsub(refNewSub.current.value) // el ref se refiere al campo input    
+    setNewsub(refNewSub.current.value) // el ref se refiere al campo input 
+    
   }
 }
 

@@ -54,14 +54,14 @@ const openSite = () => {
         
       <Box sx={{paddingLeft: '1rem', paddingRight: '1rem', display: 'flex', flexDirection: 'row', alignItems: 'center', 
             justifyContent:'space-between' }}> 
-            
+            {/* icono con pulgar hacia arriba + numero de likes */}
             <Box sx={{display: 'flex',flexDirection: 'row', alignItems: 'center' }}>
                   <Icon>
                     <ThumbUpAltOutlinedIcon sx={{fontSize:'1.2rem'}} />
                   </Icon>
                     <Typography sx={{ml:'0.5rem',fontSize:'0.7rem'}} variant="overline"> {props.ups} </Typography>                  
             </Box>
-
+{/* el campo topic o el campo hint -  */}
             <Typography sx={{fontSize:'1.1rem', fontWeight: '900'}} > {props.topic || props.hint} </Typography>          
       </Box>
       
@@ -87,7 +87,7 @@ const openSite = () => {
             
             
           <Box>
-                <Typography sx={{mr:'1rem', fontSize:'0.7rem'}}
+                <Typography sx={{mr:'0.4rem', fontSize:'0.7rem'}}
                         //mr={1}
                         variant="overline">{props.num_comments}
                     </Typography>
