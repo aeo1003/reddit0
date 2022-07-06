@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 //import * as API from "../services/GetInfo"
-import {Box,Grid} from '@mui/material/'
+import {Box,Modal,Grid} from '@mui/material/'
 import Masonry from '@mui/lab/Masonry'
 import Datos from './Datos'
 import {navbar,postcards,postcardsDark} from './data'
@@ -71,18 +71,50 @@ export default function BlockOfPosts(props) {
    },[])
 
 
+   useEffect(() => {
+            if(tempComments.length>0)
+            {
+                props.onComments(tempComments)
+            // <Modal open={true}>
+            //     <Box style = {{
+            //         position: 'absolute',
+            //         top: '50%',
+            //         left: '50%',
+            //         transform: 'translate(-50%, -50%)',
+            //         width: 400,
+            //         bgcolor: 'background.paper',
+            //         border: '2px solid #000',
+            //         boxShadow: 24,
+            //         pt: 2,
+            //         px: 4,
+            //         pb: 3,
+            //     }}> 
+            //         {tempComments.map(co => co.data.body)}
+            //     </Box>
+            // </Modal>
+            }
+   },[tempComments])
+
+
     function UTCtoDate(utc) {
         const d = new Date(utc*1000);
         return d.toLocaleDateString();
     }
     
 //    console.log('----> st : ',props.m)
+    //  if(tempComments.length>0) return (
+    //         <div>
+               
+    //         </div>
+
+    //  )
+   // if(tempComments.length>0) {console.log(tempComments)}
 
     if(lo){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>loading...</h3></div> } 
 
    
-    if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>No lo encuentro.</h3></div> }
-    if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>Zona Privada, prohibido el paso.</h3></div> }
+    if( (!lo && er ) || st===404 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#aaa'}}>No lo encuentro.</h3></div> }
+    if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#aaa'}}>Zona Privada, prohibido el paso.</h3></div> }
     
     if (da?.data?.children.length>0) { 
         console.log('state : ',state)
@@ -108,6 +140,7 @@ export default function BlockOfPosts(props) {
                                     url={item.data.url}
                                     hint={item.data.post_hint}
                                     thumb={item.data.thumbnail}
+                                    onChangeComments = {e =>setTempComments(e)}
                                    // theme={props.m}
 
                                 />                    

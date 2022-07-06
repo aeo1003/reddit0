@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const lightTheme = {
     palette: {
         primary: {
-          main: "#5aa"
+          main: "#aaa"
         },
         secondary: {
           main: "#9500ae"
@@ -16,14 +16,14 @@ export const lightTheme = {
       MuiPaper: {
         styleOverrides: {
           root: {
-            background: '#7acaca'
+            background: '#cacaca'
           }
         }
       },
       MuiCard: {
         styleOverrides: {
             root: {
-              background: '#5aa'
+              background: '#aaa'
             }
           }
       },
@@ -58,25 +58,25 @@ export const lightTheme = {
 export const darkTheme = {
     palette: {
         primary: {
-          main: '#055'
+          main: '#555'
         },
         secondary: {
           main: "#9500ae"
         }
       },
-      body:'#208',
+      body:'#888',
     components: {     
       MuiPaper: {
         styleOverrides: {
           root: {
-            background: '#388'
+            background: '#333'
           }
         }
       },
       MuiCard: {
         styleOverrides: {
             root: {
-              background: '#166'
+              background: '#666'
             }
           }
       },

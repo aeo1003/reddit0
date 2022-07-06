@@ -1,5 +1,6 @@
 import React, {useContext,useState,useEffect} from 'react'
-import { Box,Divider,Card, Grid,Icon, Paper, Typography, IconButton} from '@mui/material/'
+import { Box,Button,Dialog,DialogTitle,DialogContent,Divider,Card, Grid,Icon, Paper, Typography, IconButton} from '@mui/material/'
+import * as API from './comments.js'
 // import * as API from "../services/GetInfo"
 // import { makeStyles } from "@mui/styles"
 import { createTheme, ThemeProvider } from "@mui/material"
@@ -14,8 +15,8 @@ import { Context } from './App';
 import useFetch from './useFetch'
 
 import baseTheme from "./styles/styles";
-
-
+// import Modal from 'react-modal';
+import ModalComments from './ModalComments.jsx'
 
 export default function Datos(props) {
   
@@ -24,24 +25,45 @@ const openSite = () => {
   window.open(props.url)
   }
 
+
+
+
+
  
      const colores = ['#AFDB37','#89C5D3','#8C9DCF','#EAACBD','#E9BB2','#a8D0C6','#b7EDC3','#DEA4C0','#f1ed22','#dcd2d3','#eae4d2','#c6d5d8','#717876','#849498'];
      const min = 0;
      const max = colores.length-1;
 
      const [theme, setTheme] = useState(baseTheme)
+     const [comments, setComments] = useState([])
  
      function randomRange(myMin, myMax) {
       return Math.floor(Math.random() * (myMax - myMin + 1) + myMin);
     }
            const rndcol = colores[randomRange(0, 10)]
-
+    const [show, setShow] = useState(false);
 
     useEffect(() => {      
       //const newTheme = navbar
       //console.log('theme : ',props.mode)
 
  },[])
+
+
+useEffect(() => {      
+  //const newTheme = navbar
+  // comments.length > 0 
+  // ? comments.map(co => console.log(co.data.body))
+  // : console.log('sin datos...')
+props.onChangeComments(comments)
+
+},[comments])
+
+
+ const handleCommentsClick = (e) => {
+   API.getComments(props.perma).then(setComments)
+   
+}
  
      return (
     <>
@@ -88,17 +110,26 @@ const openSite = () => {
             
           <Box>
                 <Typography sx={{mr:'0.4rem', fontSize:'0.7rem'}}
-                        //mr={1}
                         variant="overline">{props.num_comments}
                     </Typography>
                 
                 <IconButton
                   sx={{mr:'0.5', size:'small'}}
-                  //size="small"                                 
                   onClick={(e) => handleCommentsClick(e)}
                 >                    
                     <ForumOutlinedIcon sx={{fontSize:'medium'}} />
                 </IconButton>
+
+                
+               
+                {/* 
+                <Dialog open = {open}>
+                  <DialogTitle>Title</DialogTitle>
+                  <DialogContent>{comments.map(co => co.data.body)}</DialogContent> 
+                  <DialogContent>{open}</DialogContent>
+                </Dialog>
+*/}
+          {/* <Box>{comments.map(co => co.data.body)}</Box> */}
           
           
           </Box>

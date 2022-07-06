@@ -11,7 +11,9 @@ import {mainApp, mainAppDark, navbar, postcards, postcardsDark} from './data'
 import { myFetch } from './myFetch'
 import axios from "axios"
 import {Masonry} from '@mui/lab/'
+
 import {lightTheme, darkTheme, GlobalStyles} from './theme.js'
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 
 
 import "@fontsource/roboto"; // Loading Roboto font. MUI was designed with this font in mind.
@@ -21,6 +23,9 @@ import {
   Switch,
   CardContent,
   Box,
+  Drawer,
+  Icon,
+  IconButton,
   Container,
   Typography,
   FormGroup,
@@ -30,28 +35,18 @@ import {
 } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles"
-import { SetMealOutlined } from '@mui/icons-material'
+import { LocalConvenienceStoreOutlined, Scale, SetMealOutlined } from '@mui/icons-material'
 
 
 export const Context = createContext('default value')
 
 function App(props) {
 
-// The light theme is used by default
-//const [isDarkTheme, setIsDarkTheme] = useState(false);
-//const [mode, setMode] = useState('light')
 const [theme, setTheme] = useState('light')
 const [themeApp, setThemeApp] = useState([])
 
-
-
-
-// This function is triggered when the Switch component is toggled
 const changeTheme = () => {
-  //console.log('theme : ',theme)
- // theme==='light' ? props.fondo : null
   theme==='light' ? setTheme('dark') : setTheme('light')
- // theme==='light' ? props.onChangeTheme(createTheme(lightTheme)) : props.onChangeTheme(createTheme(darkTheme))
 };
 
    const [title, setTitle] = useState('NEWS')
@@ -60,7 +55,9 @@ const changeTheme = () => {
    const {data,error,loading,status} = useFetch(url)
    
    const [datos,setDatos] = useState([])
-   const [fondo, setFondo] = useState({})
+   const [comments, setComments] = useState()
+
+   const [isModalOpen, setIsModalOpen] = useState(false)
    
    useEffect(() => {
       setDatos(data)    
@@ -69,13 +66,18 @@ const changeTheme = () => {
    useEffect(() => {
       setTitle(title)
       setDatos([])
-                                                      //  setTheme(createTheme(postcards))
-      // setFondo('lightFondo')
-    //  setThemeApp(createTheme(mainApp))
-      
-      //console.log('sljfsdkf',theme)
    },[])
+   
+   useEffect(() => {
+      comments?.length>0
+         ? setIsModalOpen(true)
+         : setIsModalOpen(false) // console.log(comments)
+      console.log(comments)
+   },[comments])
 
+   const onCloseModal = () => {
+      setIsModalOpen(false)
+   }
    
    const cambia = (e) => {
       title!==''
@@ -124,7 +126,6 @@ const changeTheme = () => {
          }
    }
 
-   
    return (
       
      
@@ -136,8 +137,19 @@ const changeTheme = () => {
                   <ButtonAppBar t={theme} s={status} title={title} onChangeSort={ (e) => {sortBy(e)} }
                               onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/> 
 
-                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  />
-        
+                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  onComments={ e => {setComments(e)} }/>
+                  <Drawer                    
+                     open={isModalOpen}
+                     onClose={onCloseModal}
+                  >
+                     <Box sx={{width:300}} >
+                        {comments?.map(c=>
+                           <Box border='1px solid black' display='block' key={c.data.created} sx={{fontSize:'0.7rem', pt:2, pl:0.5}} >                                                            
+                              {c.data.body}
+                              {c.data.replies !== '' ? <IconButton style={{transform: `scale(0.6)`}} > <ExpandCircleDownIcon /> </IconButton> :null}
+                           </Box>)}
+                     </Box>
+                  </Drawer>
          </ThemeProvider> 
       </div>
       
