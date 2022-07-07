@@ -110,6 +110,15 @@ export default function BlockOfPosts(props) {
     //  )
    // if(tempComments.length>0) {console.log(tempComments)}
 
+   function changeComments(e) {
+    setTempComments(e)
+    //console.log('comments : ',e)
+   }
+
+//    function changeUrl(e) {   
+//     console.log('url : ',e)
+//    }
+
     if(lo){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#ccc'}}>loading...</h3></div> } 
 
    
@@ -117,7 +126,7 @@ export default function BlockOfPosts(props) {
     if( (!lo && er ) || st===403 ){ return <div style={{padding:'2rem'}} ><h3 style={{color:'#aaa'}}>Zona Privada, prohibido el paso.</h3></div> }
     
     if (da?.data?.children.length>0) { 
-        console.log('state : ',state)
+        //console.log('state : ',state)
         return (    
         <>
         {/* <StyledEngineProvider injectFirst> */}
@@ -140,7 +149,9 @@ export default function BlockOfPosts(props) {
                                     url={item.data.url}
                                     hint={item.data.post_hint}
                                     thumb={item.data.thumbnail}
-                                    onChangeComments = {e =>setTempComments(e)}
+                                    onChangeComments = {e =>{changeComments(e)}}
+                                    onChangeUrl = {e => {props.onUrl(e)}}
+                                    // onChangeUrl2 = {e => {props.onUrl}}
                                    // theme={props.m}
 
                                 />                    

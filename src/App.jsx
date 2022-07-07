@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef, createContext, useContext } from 'react'
 import './App.css'
 import useFetch from './useFetch'
+import useFetchComments from './useFetchComments'
 import ButtonAppBar from './ButtonAppBar'
 import baseTheme from './styles/styles'
 import Datos from './Datos'
@@ -24,6 +25,7 @@ import {
   CardContent,
   Box,
   Drawer,
+  List,
   Icon,
   IconButton,
   Container,
@@ -58,6 +60,8 @@ const changeTheme = () => {
    const [comments, setComments] = useState()
 
    const [isModalOpen, setIsModalOpen] = useState(false)
+   const [isReplyOpen, setIsReplyOpen] = useState(false)
+   const [commentsUrl, setCommentsUrl] = useState()
    
    useEffect(() => {
       setDatos(data)    
@@ -69,11 +73,27 @@ const changeTheme = () => {
    },[])
    
    useEffect(() => {
+      //console.log('los come : ',commentsUrl)
+   },[commentsUrl])
+   
+   const {cData,cError,cLoading} = useFetchComments(commentsUrl)
+
+
+   useEffect(() => {
       comments?.length>0
          ? setIsModalOpen(true)
-         : setIsModalOpen(false) // console.log(comments)
-      console.log(comments)
+         : setIsModalOpen(false)
    },[comments])
+
+   const loadComments = e => {
+      //console.log('la e es : ',e)
+       setComments(e)      
+   }
+   
+   const loadUrl = e => {
+      //console.log('la e es : ',e)
+       setCommentsUrl(e)      
+   }
 
    const onCloseModal = () => {
       setIsModalOpen(false)
@@ -126,6 +146,14 @@ const changeTheme = () => {
          }
    }
 
+
+   const toggleReplies = (c) => {
+      isReplyOpen
+      ? setIsReplyOpen(false)
+      : setIsReplyOpen(true)
+      //console.log(c)
+   }
+
    return (
       
      
@@ -134,22 +162,55 @@ const changeTheme = () => {
          <ThemeProvider theme={theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme)} > 
             
             {/* <GlobalStyles /> */}               
-                  <ButtonAppBar t={theme} s={status} title={title} onChangeSort={ (e) => {sortBy(e)} }
-                              onChange={(e) => {cambia(e)} }  onChangeTheme={ (e) => {changeTheme(e)} }/> 
+                  <ButtonAppBar 
+                        t={theme} 
+                        s={status} 
+                        title={title} 
+                        onChangeSort={ (e) => {sortBy(e)} }                              
+                        onChange={(e) => {cambia(e)} }  
+                        onChangeTheme={ (e) => {changeTheme(e)} }
+                  /> 
 
-                  <BlockOfPosts d={datos} e={error} l={loading} t={title} s={status}  onComments={ e => {setComments(e)} }/>
-                  <Drawer                    
-                     open={isModalOpen}
-                     onClose={onCloseModal}
-                  >
-                     <Box sx={{width:300}} >
-                        {comments?.map(c=>
-                           <Box border='1px solid black' display='block' key={c.data.created} sx={{fontSize:'0.7rem', pt:2, pl:0.5}} >                                                            
-                              {c.data.body}
-                              {c.data.replies !== '' ? <IconButton style={{transform: `scale(0.6)`}} > <ExpandCircleDownIcon /> </IconButton> :null}
-                           </Box>)}
-                     </Box>
-                  </Drawer>
+                        <BlockOfPosts 
+                           d={datos} 
+                           e={error} 
+                           l={loading} 
+                           t={title} 
+                           s={status} 
+                           onUrl={ (e) => loadUrl(e)} 
+                           onComments={ e => {loadComments(e)} }
+                        />
+                              <Drawer 
+                                 variant='temporary'                   
+                                 open={isModalOpen}
+                                 onClose={onCloseModal}
+                              >                              
+
+                                 <Box sx={{width:300}} >
+                                    {comments?.map(c=>
+                                       <Box 
+                                          border='1px solid #F2F4A6' 
+                                          display='flow' 
+                                          key={c.data.created} 
+                                          sx={{fontSize:'0.7rem', pt:2, pl:0.5}}  
+                                       >
+                                          <Typography 
+                                             fontSize='0.9rem' 
+                                             gutterBottom
+                                          >
+                                             {c.data.body}                          
+                                             {c.data.replies !== '' 
+                                                   ? <IconButton  style={{transform: `scale(0.6)`}} > <ExpandCircleDownIcon /> </IconButton> 
+                                                   :null}
+                                             {/* {isReplyOpen ? <Box style={{display:'flex'}} >test</Box> : <Box style={{display:'none'}} >test</Box>}
+                                             {cLoading ? loading : null} */}
+                                          </Typography>
+
+                                          
+                                       </Box> )}
+                                    
+                                 </Box>
+                              </Drawer>
          </ThemeProvider> 
       </div>
       

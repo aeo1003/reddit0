@@ -188,8 +188,10 @@ const handleStarClick = (e,t) => {
    
      <AppBar style={ scrollDirection === "up" ? styles.hidden : styles.active } position="sticky" >
       
-      <Toolbar sx={{ justifyContent: "space-between"}}>
-          <Box display='flex' alignItems='center'>
+              
+      <Toolbar >
+          {/* <Box spacing={{ xs:1, md:4, lg:7}} display='flex' alignItems='center'> */}
+          <Box marginRight={7} display='flex' alignItems='center'>
               <IconButton
                 id='menu'
                 size="large"
@@ -272,12 +274,12 @@ const handleStarClick = (e,t) => {
           </Box>
   
               
-                      <Box display='flex' direction='row' alignItems='center' > 
+                      {/* <Box display='flex' direction='row' alignItems='center' >  */}
                       
                        <IconButton checked={isDarkTheme}  onClick={changeTheme}>
                         { !isDarkTheme ? <NightsStayTwoToneIcon /> : <WbSunnyIcon /> }
                        </IconButton >
-                      </Box>
+                      {/* </Box> */}
               
   
         <Menu

@@ -51,20 +51,28 @@ const openSite = () => {
 
 
 useEffect(() => {      
-  //const newTheme = navbar
-  // comments.length > 0 
-  // ? comments.map(co => console.log(co.data.body))
-  // : console.log('sin datos...')
-props.onChangeComments(comments)
+
+  const url = 'https://www.reddit.com'+props.perma+'data.json'
+  props.onChangeComments(comments) // le pasa comments a BlockOfPosts function -> onChangeComments
+  props.onChangeUrl(url)
 
 },[comments])
 
 
  const handleCommentsClick = (e) => {
    API.getComments(props.perma).then(setComments)
+   // const url = 'https://www.reddit.com/r/'+title+'/hot.json?limit=60'
    
+   
+  // const url = 'https://www.reddit.com'+props.perma+'data.json'
+  
+   // console.log('lo : ',loading)
 }
  
+ // const {data,error,loading,status} = useFetch(cUrl)
+
+
+
      return (
     <>
     
@@ -121,16 +129,6 @@ props.onChangeComments(comments)
                 </IconButton>
 
                 
-               
-                {/* 
-                <Dialog open = {open}>
-                  <DialogTitle>Title</DialogTitle>
-                  <DialogContent>{comments.map(co => co.data.body)}</DialogContent> 
-                  <DialogContent>{open}</DialogContent>
-                </Dialog>
-*/}
-          {/* <Box>{comments.map(co => co.data.body)}</Box> */}
-          
           
           </Box>
 

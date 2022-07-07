@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <>
     {/* <GlobalStyles /> */}
-    <div style={{backgroundColor:'#5a6'}}><App /></div>
+    <App />
   </>
 
   // </React.StrictMode>

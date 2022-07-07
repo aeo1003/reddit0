@@ -3,24 +3,24 @@ import { useEffect, useState } from "react"
 
 
 const handleData = (callback) => {
-    if (data){
-      callback(data);
+    if (cData){
+      callback(cData);
       setData(null);
     }
   }
 
   const handleError = (callback) => {
-    if (error){
-      callback(error);
+    if (cError){
+      callback(cError);
       setError(null);
     }
   }
 
-export default function useFetch(url){
+export default function useFetchComments(url){
     //console.log('la url es : ',url)
-    const [data,setData] = useState(null)
-    const [error,setError] = useState(null)
-    const [loading,setLoading] = useState(false)
+    const [cData,setData] = useState(null)
+    const [cError,setError] = useState(null)
+    const [cLoading,setLoading] = useState(false)
     const [status,setStatus] = useState(null)
 
     useEffect( () => {  
@@ -45,8 +45,8 @@ export default function useFetch(url){
         )()
         //setLoading(false)
     }, [url])
-        //console.log('-----',data)
-        return { data, handleData, error, handleError, loading, status }         
+       // console.log('-----',cData)
+        return { cData, handleData, cError, handleError, cLoading, status }         
     // }
 
 }
