@@ -59,7 +59,7 @@ const changeTheme = () => {
    const [datos,setDatos] = useState([])
    const [comments, setComments] = useState()
 
-   const [isModalOpen, setIsModalOpen] = useState(false)
+   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
    const [isReplyOpen, setIsReplyOpen] = useState(false)
    const [commentsUrl, setCommentsUrl] = useState()
    
@@ -81,8 +81,8 @@ const changeTheme = () => {
 
    useEffect(() => {
       comments?.length>0
-         ? setIsModalOpen(true)
-         : setIsModalOpen(false)
+         ? setIsDrawerOpen(true)
+         : setIsDrawerOpen(false)
    },[comments])
 
    const loadComments = e => {
@@ -96,7 +96,7 @@ const changeTheme = () => {
    }
 
    const onCloseModal = () => {
-      setIsModalOpen(false)
+      setIsDrawerOpen(false)
    }
    
    const cambia = (e) => {
@@ -154,6 +154,12 @@ const changeTheme = () => {
       //console.log(c)
    }
 
+   const testClick = (e) => {
+       console.log('current target : ',e)
+      // console.log('target : ',data.data.children[0].data.body)
+      // return {data.data.children[0].data.body}
+   }
+
    return (
       
      
@@ -182,7 +188,7 @@ const changeTheme = () => {
                         />
                               <Drawer 
                                  variant='temporary'                   
-                                 open={isModalOpen}
+                                 open={isDrawerOpen}
                                  onClose={onCloseModal}
                               >                              
 
@@ -192,18 +198,37 @@ const changeTheme = () => {
                                           border='1px solid #F2F4A6' 
                                           display='flow' 
                                           key={c.data.created} 
-                                          sx={{fontSize:'0.7rem', pt:2, pl:0.5}}  
+                                          sx={{fontSize:'0.7rem', paddingTop:2, paddingLeft:0.5}}  
                                        >
                                           <Typography 
                                              fontSize='0.9rem' 
                                              gutterBottom
                                           >
-                                             {c.data.body}                          
-                                             {c.data.replies !== '' 
-                                                   ? <IconButton  style={{transform: `scale(0.6)`}} > <ExpandCircleDownIcon /> </IconButton> 
-                                                   :null}
-                                             {/* {isReplyOpen ? <Box style={{display:'flex'}} >test</Box> : <Box style={{display:'none'}} >test</Box>}
-                                             {cLoading ? loading : null} */}
+                                             <Box>{c.data.body}</Box>
+                                             {c.data.replies !== ''
+                                             ?  <Box style={{backgroundColor:'whitesmoke', 
+                                                            color: '#222',
+                                                            fontSize:'0.7rem', 
+                                                            paddingLeft:'1rem', 
+                                                            paddingRight:'1rem'
+                                                            }} >
+                                                      {c.data?.replies?.data?.children[0].data.body} 
+                                                </Box> 
+                                             :null
+                                             }                     
+                                             
+                                             {/* {c.data.replies !== ''
+                                                    ? null
+                                                    :null
+                                                    ? <IconButton 
+                                                          onClick={e => testClick(e,c.data.replies)} 
+                                                          style={{transform: `scale(0.6)`}} > 
+                                                          <ExpandCircleDownIcon /> 
+                                                      </IconButton> 
+                                                    :null
+
+                                             }   */}
+                                             
                                           </Typography>
 
                                           

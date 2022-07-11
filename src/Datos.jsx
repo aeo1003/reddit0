@@ -101,7 +101,7 @@ useEffect(() => {
 
       <Box onClick={openSite} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }}>
             <Box sx={{marginLeft:'0.5rem',cursor:'pointer', display: 'flex', flexDirection: 'row', 
-                      alignItems: 'center', justifyContent:'space-between' }}>
+                      alignItems: 'center', justifyContent:'space-between' }}  p={2}>
                 <Typography sx={{ fontWeight:'500', fontSize:'0.9rem' }} 
                             variant="body1">{props.subject}
                 </Typography>
@@ -111,7 +111,7 @@ useEffect(() => {
         
       <Box >
         
-        <Box><Divider /></Box>
+        <Divider />
         <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>
             <Typography sx={{fontSize:'0.7rem', ml:'0.5rem'}} variant="overline" > {props.utc} </Typography>
             
